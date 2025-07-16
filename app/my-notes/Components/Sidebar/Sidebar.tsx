@@ -3,7 +3,7 @@
 import { useGlobalContext } from "@/Context";
 import getLanguageIcon from "@/app/utils/languageToIcon";
 import { useClerk } from "@clerk/nextjs";
-import DataObjectIcon from "@mui/icons-material/DataObject";
+import CodeIcon from "@mui/icons-material/Code";
 
 export default function Sidebar() {
   const {
@@ -28,11 +28,11 @@ export default function Sidebar() {
     return (
       <div className="flex gap-2 items-center">
         <div className={`bg-purple-600 p-[6px] rounded-md`}>
-          <DataObjectIcon sx={{ fontSize: 27, color: "white" }} />
+          <CodeIcon sx={{ fontSize: 27, color: "white" }} />
         </div>
-        <div className="flex gap-1 text-[19px] ">
+        <div className="flex gap-0 text-[19px] ">
           <span className={`font-bold text-purple-600`}>Snippet</span>
-          <span className="text-slate-400">Master</span>
+          <span className="text-slate-400">arium</span>
         </div>
       </div>
     );

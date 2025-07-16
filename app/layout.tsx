@@ -11,7 +11,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Snippet Master",
+  title: "Snippetarium",
   description: "Organize Your Code Snippets Efficiently!",
 };
 
