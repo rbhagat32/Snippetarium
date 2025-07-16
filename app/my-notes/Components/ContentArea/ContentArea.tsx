@@ -50,7 +50,7 @@ function NotesArea() {
     isMobileObject: { isMobile },
   } = useGlobalContext();
   return (
-    <div className=" flex gap-2 mt-5">
+    <div className="flex gap-2 mt-5">
       <div
         className={`${openContentNote ? `${isMobile ? "w-full" : "w-[50%]"}` : "w-full"}`}
       >

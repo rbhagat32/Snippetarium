@@ -163,15 +163,14 @@ function AllNotesSection() {
     }
   }, [sideBarMenu]);
 
-  function ShimmerNoteEffect() {
+  function SnippetSkeleton() {
     return (
-      <div className="h-[380px] w-[300px] bg-white rounded-md flex flex-col  ">
+      <div className="h-[380px] w-full bg-white rounded-md flex flex-col">
         <div className="flex justify-between px-5 pt-5">
           <div className="w-1/2 h-7 bg-slate-100 rounded-sm"></div>
           <div className="w-7 h-7 bg-slate-100 rounded-sm"></div>
         </div>
-
-        <div className="h-[230px] mt-12 w-full bg-slate-200  "></div>
+        <div className="h-[230px] mt-12 w-full bg-slate-200"></div>
       </div>
     );
   }
@@ -188,22 +187,16 @@ function AllNotesSection() {
 
   return (
     <div
-      className={`mt-5 ${isMobile || openContentNote ? "grid grid-cols-1" : "flex flex-wrap"}  gap-6  `}
+      className={`mt-5 ${isMobile || openContentNote ? "grid grid-cols-1" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full"}  gap-6  `}
     >
       {sideBarMenu[0].isSelected && (
         <>
           {isLoading ? (
-            <>
-              <ShimmerNoteEffect />
-              <ShimmerNoteEffect />
-              <ShimmerNoteEffect />
-              <ShimmerNoteEffect />
-              <ShimmerNoteEffect />
-              <ShimmerNoteEffect />
-              <ShimmerNoteEffect />
-              <ShimmerNoteEffect />
-              <ShimmerNoteEffect />
-            </>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <SnippetSkeleton key={i} />
+              ))}
+            </div>
           ) : (
             <>
               {filteredNotes.filter((note) => !note.isTrash).length === 0 &&
@@ -348,7 +341,7 @@ export default AllNotesSection;
 function SingleNote({ note }: { note: SingleNoteType }) {
   const {
     darkModeObject: { darkMode },
-    openContentNoteObject: { openContentNote },
+    openContentNoteObject: {},
     selectedNoteObject: { selectedNote },
     allNotesObject: {},
   } = useGlobalContext();
@@ -367,8 +360,7 @@ function SingleNote({ note }: { note: SingleNoteType }) {
 
   return (
     <div
-      className={`${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} ${openContentNote ? "w-full" : "w-[390px]"} 
-      max-sm:w-full rounded-md py-4   hover:translate-y-[-1px] ${selectedNote?._id === _id && !selectedNote.isTrash ? "border border-rose-600" : ""} `}
+      className={`${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} rounded-md py-4 hover:translate-y-[-1px] ${selectedNote?._id === _id && !selectedNote.isTrash ? "border border-rose-600" : ""} `}
     >
       <NoteHeader
         id={_id}
