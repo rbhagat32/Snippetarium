@@ -1,14 +1,8 @@
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useEffect, useState } from "react";
-
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-
-// import required modules
 import { useGlobalContext } from "@/ContextApi";
 import { FreeMode } from "swiper/modules";
 
@@ -58,7 +52,6 @@ export default function SwiperSelection() {
     });
   }, [tagsSelected]);
 
-  //Reset the tagsSelected state when allTags changes
   useEffect(() => {
     if (allTags) {
       const newTagsSelected = Array(allTags.length).fill(false);
@@ -67,7 +60,6 @@ export default function SwiperSelection() {
     }
   }, [allTags]);
 
-  //Reset the tagsSelected and tagsClicked state when sideBarMenu changes
   useEffect(() => {
     if (sideBarMenu) {
       const newTagsSelected = Array(allTags.length).fill(false);
@@ -81,13 +73,13 @@ export default function SwiperSelection() {
   const handleTagClick = (index: number) => {
     const newTagsSelected = [...tagsSelected];
 
-    //If I click on All, turn all the other tags to false
     if (index === 0) {
       newTagsSelected[0] = true;
-      //Turn all the tags except to all to false
+
       for (let index = 1; index < newTagsSelected.length; index++) {
         newTagsSelected[index] = false;
       }
+
       setTagsSelected(newTagsSelected);
       return;
     } else {
@@ -96,7 +88,6 @@ export default function SwiperSelection() {
       setTagsSelected(newTagsSelected);
     }
 
-    //if all the tags are false, turn the first one to true
     if (newTagsSelected.every((tag) => !tag)) {
       newTagsSelected[0] = true;
       setTagsSelected(newTagsSelected);
@@ -107,7 +98,6 @@ export default function SwiperSelection() {
     <div
       className={`${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"}  p-3 rounded-lg flex gap-5 `}
     >
-      {/* Second div */}
       <div className="overflow-x-auto w-[100%]    ">
         {isLoading ? (
           <div className="flex  gap-3 items-center mt-[2px]   ">

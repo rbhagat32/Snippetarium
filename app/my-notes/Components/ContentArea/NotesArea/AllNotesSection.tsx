@@ -18,6 +18,7 @@ import {
   materialLight,
   oneDark,
 } from "react-syntax-highlighter/dist/cjs/styles/prism";
+
 function AllNotesSection() {
   const {
     allNotesObject: { allNotes },
@@ -41,7 +42,6 @@ function AllNotesSection() {
 
   const [isSearching, setIsSearching] = useState(false);
 
-  //Update the filteredNotes based on the searchQuery
   useEffect(() => {
     setIsSearching(searchQuery !== "");
 
@@ -82,15 +82,13 @@ function AllNotesSection() {
     }
   }, [isSearching]);
 
-  //This useEffect will trigger this code, whenever we make a change in the all Notes
   useEffect(() => {
-    //If all Snippets is selected, show all the snippets that are not trashed
     if (sideBarMenu[0].isSelected) {
       if (tagsClicked.length === 1 && tagsClicked[0] === "All") {
         setFilteredNotes(allNotes.filter((note) => !note.isTrash));
         return;
       }
-      //Filter out based on the tagsClickedArray
+
       if (tagsClicked.length > 0) {
         const updateNotes = allNotes
           .filter((note) => {
@@ -102,10 +100,8 @@ function AllNotesSection() {
 
         setFilteredNotes(updateNotes);
       }
-      // setFilteredNotes(allNotes.filter((note) => !note.isTrash));
     }
 
-    //If favorite is selected, and we make a note as favorite and not trashed
     if (sideBarMenu[1].isSelected) {
       if (tagsClicked.length === 1 && tagsClicked[0] === "All") {
         const updatesNotes = allNotes.filter(
@@ -149,11 +145,11 @@ function AllNotesSection() {
     if (openContentNote) {
       setOpenContentNote(false);
     }
-    //If all Snippets is selected
+
     if (sideBarMenu[0].isSelected) {
       setFilteredNotes(filterIsTrashedNotes);
     }
-    //If favorite is selected, filter favorite notes
+
     if (sideBarMenu[1].isSelected) {
       const filteredFavoriteNotes = allNotes.filter(
         (note) => !note.isTrash && note.isFavorite
@@ -161,7 +157,6 @@ function AllNotesSection() {
       setFilteredNotes(filteredFavoriteNotes);
     }
 
-    //If trashed is selected
     if (sideBarMenu[2].isSelected) {
       const filteredTrashedNotes = allNotes.filter((note) => note.isTrash);
       setFilteredNotes(filteredTrashedNotes);
@@ -171,13 +166,10 @@ function AllNotesSection() {
   function ShimmerNoteEffect() {
     return (
       <div className="h-[380px] w-[300px] bg-white rounded-md flex flex-col  ">
-        {/* Header */}
         <div className="flex justify-between px-5 pt-5">
           <div className="w-1/2 h-7 bg-slate-100 rounded-sm"></div>
           <div className="w-7 h-7 bg-slate-100 rounded-sm"></div>
         </div>
-
-        {/* code */}
 
         <div className="h-[230px] mt-12 w-full bg-slate-200  "></div>
       </div>
@@ -201,7 +193,6 @@ function AllNotesSection() {
       {sideBarMenu[0].isSelected && (
         <>
           {isLoading ? (
-            // Show loading shimmer effects when loading
             <>
               <ShimmerNoteEffect />
               <ShimmerNoteEffect />
@@ -414,20 +405,18 @@ function NoteHeader({
   } = useGlobalContext();
 
   function clickedNoteTitle() {
-    // Getting the note based on the id
     const findTheNote = allNotes.find((note) => note._id === id);
 
     if (findTheNote) {
       setSelectedNote(findTheNote);
     }
-    // Opening up the content note component only if the note is not trashed
+
     if (!isTrashed) {
       setOpenContentNote(true);
     }
 
     setIsNewNote(false);
 
-    // Scroll the window to the top
     window.scrollTo({ top: 0, behavior: "smooth" });
     setSearchQuery("");
   }
@@ -460,8 +449,6 @@ function NoteHeader({
       setSearchQuery("");
     } catch (error) {
       console.error("Error updating favorite status:", error);
-      // Optionally, revert the UI change if the API call fails
-      // setIsFavorite(currentFavorite);
     }
   }
 
@@ -513,9 +500,8 @@ function NoteDate({ creationDate }: { creationDate: string }) {
   );
 
   function getDateOnly(dateTimeString: string) {
-    // Split the date-time string and return only the date part
     const [date] = dateTimeString.split(", ");
-    return date; // Keep the month, day, and year part
+    return date;
   }
 }
 
@@ -617,7 +603,6 @@ function NoteFooter({
       ));
     } catch (error) {
       console.error("Error moving note to trash:", error);
-      // Optionally, show an error toast to the user
     }
   }
 
@@ -646,7 +631,6 @@ function NoteFooter({
       toast.success("Note restored from trash");
     } catch (error) {
       console.error("Error restoring note from trash:", error);
-      // Optionally, show an error toast to the user
     }
   }
 
