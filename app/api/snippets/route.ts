@@ -1,7 +1,7 @@
 import connect from "@/app/lib/connect";
-
 import Snippet from "@/app/Models/SnippetSchema";
 import { NextResponse } from "next/server";
+
 export async function POST(req: Request) {
   try {
     const {
@@ -72,10 +72,8 @@ export async function PUT(request: any) {
       );
     }
 
-    // Connect to the database
     await connect();
 
-    // Find the snippet by snippet and update it
     const updatedSnippet = await Snippet.findOneAndUpdate(
       { _id: snippetId },
       {
@@ -91,7 +89,7 @@ export async function PUT(request: any) {
           isTrash,
         },
       },
-      { returnDocument: "after" } // Return the updated document
+      { returnDocument: "after" }
     );
 
     return NextResponse.json({
@@ -126,7 +124,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({ message: "Snippet deleted successfully" });
   } catch (error) {
-    console.error("Error deleting snippet:", error); // Log the error for debugging
+    console.error("Error deleting snippet:", error);
     return NextResponse.json(
       { message: "Failed to delete snippet" },
       { status: 500 }
