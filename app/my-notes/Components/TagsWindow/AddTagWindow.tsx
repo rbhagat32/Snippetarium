@@ -1,6 +1,5 @@
 "use client";
 
-import { SingleNoteType, SingleTagType } from "@/app/Types";
 import { useGlobalContext } from "@/ContextApi";
 import CloseIcon from "@mui/icons-material/Close";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";

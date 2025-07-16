@@ -1,6 +1,5 @@
 import { useGlobalContext } from "@/ContextApi";
 import EmptyPlaceHolder from "@/app/EmptyPlaceHolder";
-import { SingleNoteType, SingleTagType } from "@/app/Types";
 import getLanguageIcon from "@/app/utils/languageTextToIcon";
 import DeleteOutlineOutlined from "@mui/icons-material/DeleteOutlineOutlined";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";

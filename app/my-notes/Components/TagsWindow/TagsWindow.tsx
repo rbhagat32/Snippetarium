@@ -11,7 +11,6 @@ import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 
 import EmptyPlaceHolder from "@/app/EmptyPlaceHolder";
-import { SingleNoteType, SingleTagType } from "@/app/Types";
 import { useGlobalContext } from "@/ContextApi";
 import toast from "react-hot-toast";
 

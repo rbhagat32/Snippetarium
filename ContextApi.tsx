@@ -10,14 +10,6 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import StyleOutlinedIcon from "@mui/icons-material/StyleOutlined";
 import { createContext, useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import {
-  CodeLanguageCounterType,
-  DarkModeType,
-  SideBarMenu,
-  SingleCodeLanguageType,
-  SingleNoteType,
-  SingleTagType,
-} from "./app/Types";
 
 interface GlobalContextType {
   sharedUserIdObject: {

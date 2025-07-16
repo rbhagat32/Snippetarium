@@ -2,7 +2,6 @@ import { useGlobalContext } from "@/ContextApi";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import { SingleNoteType } from "./Types";
 
 function EmptyPlaceHolder({
   muiIcon,

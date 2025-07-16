@@ -1,5 +1,4 @@
 import { useGlobalContext } from "@/ContextApi";
-import { SingleCodeLanguageType, SingleNoteType } from "@/app/Types";
 import CloseIcon from "@mui/icons-material/Close";
 import CodeOutlinedIcon from "@mui/icons-material/CodeOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";

@@ -1,28 +1,28 @@
-export interface SideBarMenu {
+interface SideBarMenu {
   id: number;
   name: string;
   isSelected: boolean;
   icons: React.ReactNode;
 }
 
-export interface CodeLanguageCounterType {
+interface CodeLanguageCounterType {
   language: string;
   count: number;
 }
 
-export interface DarkModeType {
+interface DarkModeType {
   id: number;
   icon: React.ReactNode;
   isSelected: boolean;
 }
 
-export interface SingleTagType {
+interface SingleTagType {
   _id: string;
   clerkUserId: string;
   name: string;
 }
 
-export interface SingleNoteType {
+interface SingleNoteType {
   _id: string;
   clerkUserId: string;
   title: string;
@@ -35,7 +35,7 @@ export interface SingleNoteType {
   isTrash: boolean;
 }
 
-export interface SingleCodeLanguageType {
+interface SingleCodeLanguageType {
   id: string;
   name: string;
   icon: React.ReactNode;
