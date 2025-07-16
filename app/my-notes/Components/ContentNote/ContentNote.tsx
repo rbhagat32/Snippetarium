@@ -13,7 +13,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@mui/material";
 
-import { allLanguages } from "@/app/localData/Languages";
+import { allLanguages } from "@/app/data/Languages";
 import AceEditor from "react-ace";
 
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
