@@ -12,14 +12,14 @@ function SearchBar() {
 
   return (
     <div
-      className={`${darkMode[1].isSelected ? "bg-slate-700" : "bg-slate-100"} relative pl-3 w-[60%] h-[38px] rounded-3xl flex items-center gap-2`}
+      className={`${darkMode[1].isSelected ? "bg-slate-700" : "bg-slate-100"} relative flex h-[38px] w-[60%] items-center gap-2 rounded-3xl pl-3`}
     >
       <SearchIcon className="text-rose-500" sx={{ fontsize: 13 }} />
       <input
         placeholder="Search a snippet..."
         onChange={(e) => setSearchQuery(e.target.value)}
         value={searchQuery}
-        className={` ${darkMode[1].isSelected ? "bg-slate-700" : "bg-slate-100"} w-[70%] outline-none text-sm  text-slate-500 text-[12px]`}
+        className={` ${darkMode[1].isSelected ? "bg-slate-700" : "bg-slate-100"} w-[70%] text-[12px] text-sm text-slate-500 outline-none`}
       />
       <AddSnippetButton />
     </div>
@@ -43,14 +43,13 @@ function SearchBar() {
             setIsNewNote,
             setSelectedNote,
             setOpenContentNote,
-            sharedUserId
+            sharedUserId,
           )
         }
-        className={`absolute flex gap-1 px-2 rounded-3xl max-md:px-1    p-1 
-      text-[13px] text-white top-[6px] right-[6px] items-center cursor-pointer select-none ${openContentNote ? "bg-rose-300" : "bg-rose-600"}`}
+        className={`absolute right-[6px] top-[6px] flex cursor-pointer select-none items-center gap-1 rounded-3xl p-1 px-2 text-[13px] text-white max-md:px-1 ${openContentNote ? "bg-rose-300" : "bg-rose-600"}`}
       >
         <AddOutlinedIcon sx={{ fontSize: 18 }} />
-        <div className="max-md:hidden ">Snippet</div>
+        <div className="max-md:hidden">Snippet</div>
       </button>
     );
   }

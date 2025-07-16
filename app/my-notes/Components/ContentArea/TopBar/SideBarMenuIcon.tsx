@@ -13,12 +13,12 @@ function SideBarMenuIcon() {
       {!openSideBar ? (
         <MenuOutlinedIcon
           onClick={() => setOpenSideBar(!openSideBar)}
-          className="text-slate-500 cursor-pointer hidden max-md:block"
+          className="hidden cursor-pointer text-slate-500 max-md:block"
         />
       ) : (
         <CloseOutlinedIcon
           onClick={() => setOpenSideBar(!openSideBar)}
-          className="text-slate-500 cursor-pointer hidden max-md:block"
+          className="hidden cursor-pointer text-slate-500 max-md:block"
         />
       )}
     </>

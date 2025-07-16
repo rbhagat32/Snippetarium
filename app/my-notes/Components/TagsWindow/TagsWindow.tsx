@@ -30,7 +30,7 @@ function TagsWindow() {
 
   const countTags = (
     notes: any[],
-    allTags: Tag[]
+    allTags: Tag[],
   ): { name: string; count: number }[] => {
     const tagCount: TagCount = allTags.reduce((acc: TagCount, tag) => {
       acc[tag.name] = 0;
@@ -55,7 +55,7 @@ function TagsWindow() {
 
   const sortAllTags = (
     notes: SingleNoteType[],
-    allTags: SingleTagType[]
+    allTags: SingleTagType[],
   ): SingleTagType[] => {
     const tagCounts = countTags(notes, allTags);
 
@@ -90,7 +90,7 @@ function TagsWindow() {
         marginRight: "auto",
         top: "45px",
       }}
-      className={`${openTagsWindow ? "fixed" : "hidden"} ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"}    h-[600px] max-sm:w-[430px] w-[60%] z-40 p-9   shadow-md rounded-md`}
+      className={`${openTagsWindow ? "fixed" : "hidden"} ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} z-40 h-[600px] w-[60%] rounded-md p-9 shadow-md max-sm:w-[430px]`}
     >
       <Header />
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
@@ -106,15 +106,15 @@ function Header() {
     openTagsWindowObject: { setOpenTagsWindow },
   } = useGlobalContext();
   return (
-    <div className="flex justify-between items-center  ">
+    <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">
         <StyleOutlinedIcon />
-        <span className="text-lg font-bold  ">Tags</span>
+        <span className="text-lg font-bold">Tags</span>
       </div>
       <div onClick={() => setOpenTagsWindow(false)}>
         <CloseIcon
           sx={{ fontSize: 16 }}
-          className="text-slate-400 cursor-pointer "
+          className="cursor-pointer text-slate-400"
         />
       </div>
     </div>
@@ -141,22 +141,22 @@ function SearchBar({
   }, [openTagsWindow]);
 
   return (
-    <div className="flex  gap-5 items-center justify-between mt-11 relative ">
+    <div className="relative mt-11 flex items-center justify-between gap-5">
       <div
-        className={`h-[42px] flex items-center text-sm  rounded-md  pl-3 gap-1 w-[85%] ${darkMode[1].isSelected ? "bg-slate-600" : "bg-slate-50"}  `}
+        className={`flex h-[42px] w-[85%] items-center gap-1 rounded-md pl-3 text-sm ${darkMode[1].isSelected ? "bg-slate-600" : "bg-slate-50"} `}
       >
         <SearchRoundedIcon className="text-slate-400" />
         <input
           ref={inputRef}
           value={searchQuery}
           placeholder="Search a tag..."
-          className="bg-transparent outline-none w-full font-light"
+          className="w-full bg-transparent font-light outline-none"
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
       <button
         onClick={() => setOpenNewTagsWindow(true)}
-        className="bg-rose-600 ml-2 p-[10px] flex w-[15%] text-sm rounded-md text-white items-center justify-center max-lg:w-[25%]"
+        className="ml-2 flex w-[15%] items-center justify-center rounded-md bg-rose-600 p-[10px] text-sm text-white max-lg:w-[25%]"
       >
         <AddOutlinedIcon sx={{ fontSize: 17 }} />
         <span className="max-md:hidden">Add Tag</span>
@@ -173,12 +173,12 @@ function TagsList({ searchQuery }: { searchQuery: string }) {
 
   const filterAllItemFromAllTags = allTags.filter((tag) => tag.name !== "All");
   const filterAllTagsBasedOnSearchQuery = filterAllItemFromAllTags.filter(
-    (tag) => tag.name.toLowerCase().includes(searchQuery.toLowerCase())
+    (tag) => tag.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
     <div
-      className={`rounded-md select-none p-3   ${darkMode[1].isSelected ? "bg-slate-600" : "bg-slate-50"} h-[380px] overflow-auto mt-9 flex flex-col gap-4`}
+      className={`select-none rounded-md p-3 ${darkMode[1].isSelected ? "bg-slate-600" : "bg-slate-50"} mt-9 flex h-[380px] flex-col gap-4 overflow-auto`}
     >
       {filterAllItemFromAllTags.length === 0 && (
         <EmptyPlaceHolder
@@ -189,7 +189,7 @@ function TagsList({ searchQuery }: { searchQuery: string }) {
             />
           }
           text={
-            <span className="text-slate-400 font-light">
+            <span className="font-light text-slate-400">
               No tags has been created yet...
             </span>
           }
@@ -245,23 +245,23 @@ function SingleTag({ tag }: { tag: SingleTagType }) {
 
   return (
     <div
-      className={` ${darkMode[1].isSelected ? "bg-slate-800" : "bg-white"} p-2 rounded-lg flex gap-3 items-center justify-between px-4 `}
+      className={` ${darkMode[1].isSelected ? "bg-slate-800" : "bg-white"} flex items-center justify-between gap-3 rounded-lg p-2 px-4`}
     >
-      <div className="flex gap-3 items-center">
-        <div className="w-2 h-2 bg-rose-600 rounded-full"></div>
+      <div className="flex items-center gap-3">
+        <div className="h-2 w-2 rounded-full bg-rose-600"></div>
         <div className="flex flex-col">
           <span className="font-bold">{tag.name}</span>
-          <span className="text-slate-400 text-[12px]">
+          <span className="text-[12px] text-slate-400">
             {countTagInAllNotes(tag)} Snippets
           </span>
         </div>
       </div>
 
-      <div className="flex gap-2 items-center">
-        <div className=" rounded-full w-7 h-7 flex items-center justify-center cursor-pointer bg-slate-200 hover:bg-slate-300">
+      <div className="flex items-center gap-2">
+        <div className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-slate-200 hover:bg-slate-300">
           <EditRoundedIcon
             onClick={() => openTagWindow(tag)}
-            className=" text-slate-400"
+            className="text-slate-400"
             sx={{ fontSize: 15 }}
           />
         </div>
@@ -275,15 +275,12 @@ function SingleTag({ tag }: { tag: SingleTagType }) {
               allNotes,
               setAllNotes,
               tagsClicked,
-              setTagsClicked
+              setTagsClicked,
             )
           }
-          className=" rounded-full w-7 h-7 flex items-center justify-center cursor-pointer bg-slate-200 hover:bg-slate-300"
+          className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-slate-200 hover:bg-slate-300"
         >
-          <DeleteRoundedIcon
-            className=" text-slate-400"
-            sx={{ fontSize: 15 }}
-          />
+          <DeleteRoundedIcon className="text-slate-400" sx={{ fontSize: 15 }} />
         </div>
       </div>
     </div>
@@ -292,7 +289,7 @@ function SingleTag({ tag }: { tag: SingleTagType }) {
 
 async function updateNote(note: SingleNoteType, tagToRemove: string) {
   const updatedTags = note.tags.filter(
-    (t) => t.name.toLowerCase() !== tagToRemove.toLowerCase()
+    (t) => t.name.toLowerCase() !== tagToRemove.toLowerCase(),
   );
   const updateNoteResponse = await fetch(
     `/api/snippets?snippetId=${note._id}`,
@@ -305,7 +302,7 @@ async function updateNote(note: SingleNoteType, tagToRemove: string) {
         ...note,
         tags: updatedTags,
       }),
-    }
+    },
   );
 
   if (!updateNoteResponse.ok) {
@@ -323,7 +320,7 @@ async function deleteTag(
   allNotes: SingleNoteType[],
   setAllNotes: React.Dispatch<React.SetStateAction<SingleNoteType[]>>,
   tagsClicked: string[],
-  setTagsClicked: React.Dispatch<React.SetStateAction<string[]>>
+  setTagsClicked: React.Dispatch<React.SetStateAction<string[]>>,
 ) {
   try {
     const deleteTagResponse = await fetch(`/api/tags?tagId=${tag._id}`, {
@@ -336,17 +333,17 @@ async function deleteTag(
     }
 
     const notesToUpdate = allNotes.filter((note) =>
-      note.tags.some((t) => t.name.toLowerCase() === tag.name.toLowerCase())
+      note.tags.some((t) => t.name.toLowerCase() === tag.name.toLowerCase()),
     );
 
     const updatePromises = notesToUpdate.map((note) =>
-      updateNote(note, tag.name)
+      updateNote(note, tag.name),
     );
 
     const updatedNotes = await Promise.all(updatePromises);
 
     const updatedAllTags = allTags.filter(
-      (t) => t.name.toLowerCase() !== tag.name.toLowerCase()
+      (t) => t.name.toLowerCase() !== tag.name.toLowerCase(),
     );
     const updatedAllNotes = allNotes.map((note) => {
       const updatedNote = updatedNotes.find((un) => un._id === note._id);
@@ -356,7 +353,7 @@ async function deleteTag(
       return {
         ...note,
         tags: note.tags.filter(
-          (t) => t.name.toLowerCase() !== tag.name.toLowerCase()
+          (t) => t.name.toLowerCase() !== tag.name.toLowerCase(),
         ),
       };
     });
@@ -364,7 +361,7 @@ async function deleteTag(
     setAllTags(updatedAllTags);
     setAllNotes(updatedAllNotes);
     setTagsClicked(
-      tagsClicked.filter((t) => t.toLowerCase() !== tag.name.toLowerCase())
+      tagsClicked.filter((t) => t.toLowerCase() !== tag.name.toLowerCase()),
     );
 
     toast.success("Tag has been deleted successfully");
@@ -373,7 +370,7 @@ async function deleteTag(
     toast.error(
       error instanceof Error
         ? error.message
-        : "Failed to delete tag or update notes"
+        : "Failed to delete tag or update notes",
     );
   }
 }

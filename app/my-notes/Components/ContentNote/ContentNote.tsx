@@ -27,7 +27,7 @@ export async function saveNoteInDB(
   setSingleNote: React.Dispatch<
     React.SetStateAction<SingleNoteType | undefined>
   >,
-  setIsNewNote: React.Dispatch<React.SetStateAction<boolean>>
+  setIsNewNote: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
   const url = isNew ? "/api/snippets" : `/api/snippets?snippetId=${note._id}`;
   const method = isNew ? "POST" : "PUT";
@@ -58,7 +58,7 @@ export async function saveNoteInDB(
       return updatedNotes.sort(
         (a, b) =>
           new Date(b.creationDate).getTime() -
-          new Date(a.creationDate).getTime()
+          new Date(a.creationDate).getTime(),
       );
     });
 
@@ -83,7 +83,7 @@ function ContentNote() {
   } = useGlobalContext();
 
   const [singleNote, setSingleNote] = useState<SingleNoteType | undefined>(
-    undefined
+    undefined,
   );
   useEffect(() => {
     if (openContentNote) {
@@ -104,7 +104,7 @@ function ContentNote() {
       debounce((note: SingleNoteType, isNew: boolean) => {
         saveNoteInDB(note, isNew);
       }, 500),
-    []
+    [],
   );
 
   async function saveNoteInDB(note: SingleNoteType, isNew: boolean) {
@@ -138,7 +138,7 @@ function ContentNote() {
           return updatedNotes.sort(
             (a, b) =>
               new Date(b.creationDate).getTime() -
-              new Date(a.creationDate).getTime()
+              new Date(a.creationDate).getTime(),
           );
         }
         return updatedNotes;
@@ -175,8 +175,7 @@ function ContentNote() {
 
   return (
     <div
-      className={`  ${isMobile ? "w-4/5 mt-[50%] shadow-lg h-[1040px]" : "w-1/2"}  p-6 z-30   rounded-lg ${openContentNote ? "block " : "hidden"} h-[100%] pb-9
-      ${isMobile ? "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" : ""} ${darkMode[1].isSelected ? "bg-slate-800" : "bg-white"} `}
+      className={` ${isMobile ? "mt-[50%] h-[1040px] w-4/5 shadow-lg" : "w-1/2"} z-30 rounded-lg p-6 ${openContentNote ? "block" : "hidden"} h-[100%] pb-9 ${isMobile ? "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" : ""} ${darkMode[1].isSelected ? "bg-slate-800" : "bg-white"} `}
     >
       {singleNote && (
         <div>
@@ -240,8 +239,8 @@ function ContentNoteHeader({
   }, [singleNote.title]);
 
   return (
-    <div className="flex justify-between    gap-8 mb-4 ">
-      <div className="flex   gap-2 w-full  ">
+    <div className="mb-4 flex justify-between gap-8">
+      <div className="flex w-full gap-2">
         <TitleOutlinedIcon
           sx={{ fontSize: 19 }}
           className={`${onFocus ? "text-rose-600" : "text-slate-400"} mt-[4px]`}
@@ -256,7 +255,7 @@ function ContentNoteHeader({
           onFocus={() => setOnFocus(true)}
           onMouseEnter={() => setOnFocus(true)}
           onMouseLeave={() => setOnFocus(false)}
-          className={`font-bold text-xl outline-none resize-none  h-auto  overflow-hidden w-full ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} `}
+          className={`h-auto w-full resize-none overflow-hidden text-xl font-bold outline-none ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} `}
         />
       </div>
       <CloseIcon
@@ -266,7 +265,7 @@ function ContentNoteHeader({
           setSingleNote(undefined);
           setSelectedNote(null);
         }}
-        className="text-slate-400 mt-[7px] cursor-pointer"
+        className="mt-[7px] cursor-pointer text-slate-400"
         sx={{ cursor: "pointer", fontSize: 18 }}
       />
     </div>
@@ -322,7 +321,7 @@ function NoteTags({
   }, [selectedTags]);
 
   return (
-    <div className="flex text-[13px] items-center gap-2">
+    <div className="flex items-center gap-2 text-[13px]">
       <StyleOutlinedIcon
         sx={{ fontSize: 19 }}
         className={`${hovered ? "text-rose-600" : "text-slate-400"}`}
@@ -332,12 +331,12 @@ function NoteTags({
         onMouseLeave={() => {
           if (!isOpened) setHovered(false);
         }}
-        className="flex justify-between  w-full relative "
+        className="relative flex w-full justify-between"
       >
-        <div className="flex gap-2 items-center select-none    flex-wrap  ">
+        <div className="flex select-none flex-wrap items-center gap-2">
           {singleNote.tags.length === 0 && (
             <div className="">
-              <span className="bg-slate-100 text-slate-400 p-1 px-2 rounded-md ">
+              <span className="rounded-md bg-slate-100 p-1 px-2 text-slate-400">
                 No Tags
               </span>
             </div>
@@ -346,7 +345,7 @@ function NoteTags({
           {singleNote.tags.map((tag, index) => (
             <div
               key={index}
-              className=" bg-slate-100 text-slate-400 p-1 px-2 rounded-md"
+              className="rounded-md bg-slate-100 p-1 px-2 text-slate-400"
             >
               {tag.name}
             </div>
@@ -357,7 +356,7 @@ function NoteTags({
                 setIsOpened(!isOpened);
               }}
               sx={{ fontSize: 19 }}
-              className="text-slate-400 cursor-pointer "
+              className="cursor-pointer text-slate-400"
             />
           )}
         </div>
@@ -390,7 +389,7 @@ function NoteTags({
     const tagsRef = useRef<HTMLDivElement>(null);
 
     const filterAllItemsFromAllTags = allTags.filter(
-      (tag) => tag.name !== "All"
+      (tag) => tag.name !== "All",
     );
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -410,22 +409,19 @@ function NoteTags({
     return (
       <div
         ref={tagsRef}
-        className="absolute top-10 bg-slate-100 w-[60%] p-3 rounded-md flex flex-col gap-2 z-50"
+        className="absolute top-10 z-50 flex w-[60%] flex-col gap-2 rounded-md bg-slate-100 p-3"
       >
         {filterAllItemsFromAllTags.map((tag) => (
           <span
             key={tag._id}
             onClick={() => onClickedTag(tag)}
-            className={`
-                ${
-                  selectedTags.some(
-                    (t) => t.name.toLowerCase() === tag.name.toLocaleLowerCase()
-                  )
-                    ? "bg-slate-300 "
-                    : ""
-                }
-                p-1 px-2 select-none cursor-pointer hover:bg-slate-300 text-slate-500 rounded-md transition-all
-              `}
+            className={` ${
+              selectedTags.some(
+                (t) => t.name.toLowerCase() === tag.name.toLocaleLowerCase(),
+              )
+                ? "bg-slate-300"
+                : ""
+            } cursor-pointer select-none rounded-md p-1 px-2 text-slate-500 transition-all hover:bg-slate-300`}
           >
             {tag.name}
           </span>
@@ -465,10 +461,10 @@ function Description({
   }, [singleNote.description]);
 
   return (
-    <div className="flex gap-2  text-[12px]  mt-8">
+    <div className="mt-8 flex gap-2 text-[12px]">
       <DescriptionOutlinedIcon
         sx={{ fontSize: 18 }}
-        className={` mt-[9px] ${isHovered ? "text-rose-600" : "text-slate-400"}`}
+        className={`mt-[9px] ${isHovered ? "text-rose-600" : "text-slate-400"}`}
       />
 
       <textarea
@@ -480,7 +476,7 @@ function Description({
         onChange={onUpdateDescription}
         value={singleNote.description}
         placeholder="New Description..."
-        className={`text-sm outline-none  border ${isHovered ? "border-rose-600" : ""} rounded-lg p-2   w-full ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"}`}
+        className={`border text-sm outline-none ${isHovered ? "border-rose-600" : ""} w-full rounded-lg p-2 ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"}`}
       />
     </div>
   );
@@ -512,7 +508,7 @@ function CodeBlock({
       const findLanguage = allLanguages.find(
         (language) =>
           language.name.toLocaleLowerCase() ===
-          selectedNote.language.toLocaleLowerCase()
+          selectedNote.language.toLocaleLowerCase(),
       );
 
       if (findLanguage) {
@@ -543,18 +539,18 @@ function CodeBlock({
   }
 
   return (
-    <div className="flex gap-2  text-[12px] text-slate-400 mt-8 relative">
+    <div className="relative mt-8 flex gap-2 text-[12px] text-slate-400">
       <CodeOutlinedIcon
         sx={{ fontSize: 18 }}
-        className={` mt-[9px] ${isHovered ? "text-rose-600" : "text-slate-400"}`}
+        className={`mt-[9px] ${isHovered ? "text-rose-600" : "text-slate-400"}`}
       />
 
       <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`${isHovered ? "border-rose-600" : ""} border rounded-lg p-3 pt-16 w-full relative`}
+        className={`${isHovered ? "border-rose-600" : ""} relative w-full rounded-lg border p-3 pt-16`}
       >
-        <div className="absolute top-4 right-4 z-40">
+        <div className="absolute right-4 top-4 z-40">
           <IconButton disabled={isCopied}>
             {isCopied ? (
               <DoneAllOutlinedIcon
@@ -573,10 +569,9 @@ function CodeBlock({
 
         <div
           onClick={() => setIsOpened(!isOpened)}
-          className={`flex gap-2 justify-between   bg-slate-100 p-[6px] px-3 rounded-md items-center text-[12px]  mt-3 
-            absolute top-1 left-3 ${darkMode[1].isSelected ? "bg-slate-600 text-white" : "bg-slate-100 text-slate-400"} cursor-pointer`}
+          className={`absolute left-3 top-1 mt-3 flex items-center justify-between gap-2 rounded-md bg-slate-100 p-[6px] px-3 text-[12px] ${darkMode[1].isSelected ? "bg-slate-600 text-white" : "bg-slate-100 text-slate-400"} cursor-pointer`}
         >
-          <div className="flex gap-1 items-center">
+          <div className="flex items-center gap-1">
             {selectedLanguage?.icon}
             <span className="mt-[1px]">{selectedLanguage?.name}</span>
           </div>
@@ -637,7 +632,7 @@ function CodeBlock({
 
     useEffect(() => {
       const filtered = allLanguages.filter((language) =>
-        language.name.toLowerCase().includes(searchQuery)
+        language.name.toLowerCase().includes(searchQuery),
       );
       setFilteredLanguages(filtered);
     }, [searchQuery]);
@@ -664,28 +659,27 @@ function CodeBlock({
     return (
       <div
         ref={menuRef}
-        className={`${darkMode[1].isSelected ? "bg-slate-600" : " "}   h-[220px]  absolute flex-col gap-2 p-3 w-[250px]  rounded-md left-3 bg-slate-100 z-50 flex   text-slate-400`}
+        className={`${darkMode[1].isSelected ? "bg-slate-600" : " "} absolute left-3 z-50 flex h-[220px] w-[250px] flex-col gap-2 rounded-md bg-slate-100 p-3 text-slate-400`}
       >
         <div
-          className={`i${darkMode[1].isSelected ? "bg-slate-800" : "bg-slate-200 "} p-1 rounded-md flex gap-1 mb-1`}
+          className={`i${darkMode[1].isSelected ? "bg-slate-800" : "bg-slate-200"} mb-1 flex gap-1 rounded-md p-1`}
         >
           <SearchIcon />
           <input
             ref={textRef}
             placeholder="Search..."
-            className="bg-transparent outline-none  "
+            className="bg-transparent outline-none"
             onChange={onChangeSearch}
             value={searchQuery}
           />
         </div>
 
-        <div className=" h-40 bg-slate-100 overflow-x-auto">
+        <div className="h-40 overflow-x-auto bg-slate-100">
           {filteredLanguages.map((language) => (
             <div
               onClick={() => clickedLanguage(language)}
               key={language.id}
-              className={`flex mb-2 gap-2 hover:bg-slate-200 p-[6px] px-3 rounded-md items-center    
-            cursor-pointer ${selectedLanguage?.name.toLocaleLowerCase() === language.name.toLocaleLowerCase() ? "bg-slate-200" : ""}`}
+              className={`mb-2 flex cursor-pointer items-center gap-2 rounded-md p-[6px] px-3 hover:bg-slate-200 ${selectedLanguage?.name.toLocaleLowerCase() === language.name.toLocaleLowerCase() ? "bg-slate-200" : ""}`}
             >
               {language.icon}
               <span className="mt-[1px]">{language.name}</span>

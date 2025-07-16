@@ -11,7 +11,7 @@ const SingleTagSchema = new Schema(
       required: true,
     },
   },
-  { _id: false }
+  { _id: false },
 );
 
 const SingleSnippetSchema = new mongoose.Schema({

@@ -68,7 +68,7 @@ export async function PUT(request: any) {
     if (!snippetId) {
       return NextResponse.json(
         { message: "Snippet ID is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -89,7 +89,7 @@ export async function PUT(request: any) {
           isTrash,
         },
       },
-      { returnDocument: "after" }
+      { returnDocument: "after" },
     );
 
     return NextResponse.json({
@@ -109,7 +109,7 @@ export async function DELETE(request: Request) {
     if (!snippetId) {
       return NextResponse.json(
         { message: "snippetId is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -118,7 +118,7 @@ export async function DELETE(request: Request) {
     if (!snippetToDelete) {
       return NextResponse.json(
         { message: "Snippet not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -127,7 +127,7 @@ export async function DELETE(request: Request) {
     console.error("Error deleting snippet:", error);
     return NextResponse.json(
       { message: "Failed to delete snippet" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -27,7 +27,7 @@ function ConfirmationWindow() {
             headers: {
               "Content-Type": "application/json",
             },
-          }
+          },
         );
 
         if (!response.ok) {
@@ -36,7 +36,7 @@ function ConfirmationWindow() {
 
         const copyAllNotes = [...allNotes];
         const updateAllNotes = copyAllNotes.filter(
-          (note) => note._id !== selectedNote._id
+          (note) => note._id !== selectedNote._id,
         );
         setAllNotes(updateAllNotes);
         setOpenConfirmationWindow(false);
@@ -62,27 +62,27 @@ function ConfirmationWindow() {
         top: "30%",
         transform: "translateY(-50%)",
       }}
-      className={`shadow-md rounded-md md:w-[450px] w-[310px] ${openConfirmationWindow ? "fixed" : "hidden"} ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"}   py-8 pt-10  p-3  z-50  flex flex-col gap-2 items-center   `}
+      className={`w-[310px] rounded-md shadow-md md:w-[450px] ${openConfirmationWindow ? "fixed" : "hidden"} ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} z-50 flex flex-col items-center gap-2 p-3 py-8 pt-10`}
     >
-      <span className="font-bold text-xl"> {`Are you sure?`}</span>
-      <span className="text-center text-[13px] opacity-75 px-8">
+      <span className="text-xl font-bold"> {`Are you sure?`}</span>
+      <span className="px-8 text-center text-[13px] opacity-75">
         Are you sure you want to delete this snippet? This action cannot be
         undone.
       </span>
-      <div className="flex gap-2 mt-5">
+      <div className="mt-5 flex gap-2">
         <button
           onClick={() => {
             setOpenConfirmationWindow(false);
             setSelectedNote(null);
           }}
-          className=" border text-[12px]   w-full px-10  p-3   rounded-md   "
+          className="w-full rounded-md border p-3 px-10 text-[12px]"
         >
           Cancel
         </button>
         <button
           onClick={deleteTheSnippet}
           disabled={isDeleting}
-          className={`  w-full px-10 text-[12px]    p-3 text-white rounded-md bg-rose-600`}
+          className={`w-full rounded-md bg-rose-600 p-3 px-10 text-[12px] text-white`}
         >
           {isDeleting ? "Deleting..." : "Delete"}
         </button>

@@ -33,11 +33,11 @@ function AllNotesSection() {
   } = useGlobalContext();
 
   const filterIsTrashedNotes = allNotes.filter(
-    (note) => note.isTrash === false
+    (note) => note.isTrash === false,
   );
 
   const [filteredNotes, setFilteredNotes] = useState(
-    allNotes.filter((note) => note.isTrash === false)
+    allNotes.filter((note) => note.isTrash === false),
   );
 
   const [isSearching, setIsSearching] = useState(false);
@@ -76,7 +76,7 @@ function AllNotesSection() {
 
       if (sideBarMenu[1].isSelected) {
         setFilteredNotes(
-          allNotes.filter((note) => !note.isTrash && note.isFavorite)
+          allNotes.filter((note) => !note.isTrash && note.isFavorite),
         );
       }
     }
@@ -93,7 +93,7 @@ function AllNotesSection() {
         const updateNotes = allNotes
           .filter((note) => {
             return tagsClicked.every((selectedTag) =>
-              note.tags.some((noteTag) => noteTag.name === selectedTag)
+              note.tags.some((noteTag) => noteTag.name === selectedTag),
             );
           })
           .filter((note) => !note.isTrash);
@@ -105,7 +105,7 @@ function AllNotesSection() {
     if (sideBarMenu[1].isSelected) {
       if (tagsClicked.length === 1 && tagsClicked[0] === "All") {
         const updatesNotes = allNotes.filter(
-          (note) => !note.isTrash && note.isFavorite
+          (note) => !note.isTrash && note.isFavorite,
         );
         setFilteredNotes(updatesNotes);
         return;
@@ -114,7 +114,7 @@ function AllNotesSection() {
       const updateNotes = allNotes
         .filter((note) => {
           return tagsClicked.every((selectedTag) =>
-            note.tags.some((noteTag) => noteTag.name === selectedTag)
+            note.tags.some((noteTag) => noteTag.name === selectedTag),
           );
         })
         .filter((note) => !note.isTrash && note.isFavorite);
@@ -132,7 +132,7 @@ function AllNotesSection() {
       const updateNotes = allNotes
         .filter((note) => {
           return tagsClicked.every((selectedTag) =>
-            note.tags.some((noteTag) => noteTag.name === selectedTag)
+            note.tags.some((noteTag) => noteTag.name === selectedTag),
           );
         })
         .filter((note) => note.isTrash);
@@ -152,7 +152,7 @@ function AllNotesSection() {
 
     if (sideBarMenu[1].isSelected) {
       const filteredFavoriteNotes = allNotes.filter(
-        (note) => !note.isTrash && note.isFavorite
+        (note) => !note.isTrash && note.isFavorite,
       );
       setFilteredNotes(filteredFavoriteNotes);
     }
@@ -165,12 +165,12 @@ function AllNotesSection() {
 
   function SnippetSkeleton() {
     return (
-      <div className="h-[380px] w-full bg-white rounded-md flex flex-col">
+      <div className="flex h-[380px] w-full flex-col rounded-md bg-white">
         <div className="flex justify-between px-5 pt-5">
-          <div className="w-1/2 h-7 bg-slate-100 rounded-sm"></div>
-          <div className="w-7 h-7 bg-slate-100 rounded-sm"></div>
+          <div className="h-7 w-1/2 rounded-sm bg-slate-100"></div>
+          <div className="h-7 w-7 rounded-sm bg-slate-100"></div>
         </div>
-        <div className="h-[230px] mt-12 w-full bg-slate-200"></div>
+        <div className="mt-12 h-[230px] w-full bg-slate-200"></div>
       </div>
     );
   }
@@ -187,12 +187,12 @@ function AllNotesSection() {
 
   return (
     <div
-      className={`mt-5 ${isMobile || openContentNote ? "grid grid-cols-1" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full"}  gap-6  `}
+      className={`mt-5 ${isMobile || openContentNote ? "grid grid-cols-1" : "grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"} gap-6`}
     >
       {sideBarMenu[0].isSelected && (
         <>
           {isLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+            <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {Array.from({ length: 6 }).map((_, i) => (
                 <SnippetSkeleton key={i} />
               ))}
@@ -210,7 +210,7 @@ function AllNotesSection() {
                       />
                     }
                     text={
-                      <span className="text-slate-400 text-md text-center">
+                      <span className="text-md text-center text-slate-400">
                         No snippets found.
                       </span>
                     }
@@ -224,7 +224,7 @@ function AllNotesSection() {
                       />
                     }
                     text={
-                      <span className="text-slate-400 text-md text-center">
+                      <span className="text-md text-center text-slate-400">
                         It looks like there are no <br /> snippets with this
                         tag.
                       </span>
@@ -240,7 +240,7 @@ function AllNotesSection() {
                         />
                       }
                       text={
-                        <span className="text-slate-400 text-md text-center">
+                        <span className="text-md text-center text-slate-400">
                           It looks like there are no <br /> snippets right now.
                         </span>
                       }
@@ -280,7 +280,7 @@ function AllNotesSection() {
                 />
               }
               text={
-                <span className="text-slate-400 text-md text-center">
+                <span className="text-md text-center text-slate-400">
                   No snippets found.
                 </span>
               }
@@ -289,12 +289,12 @@ function AllNotesSection() {
             <EmptyPlaceHolder
               muiIcon={
                 <FavoriteBorderOutlinedIcon
-                  className="text-slate-400 text-md"
+                  className="text-md text-slate-400"
                   sx={{ fontSize: 110 }}
                 />
               }
               text={
-                <span className="text-slate-400 text-md text-center text-md ">
+                <span className="text-md text-md text-center text-slate-400">
                   Currently, there are no snippets <br /> marked as favorites.
                 </span>
               }
@@ -323,7 +323,7 @@ function AllNotesSection() {
                   />
                 }
                 text={
-                  <span className="text-slate-400 text-md text-center ">
+                  <span className="text-md text-center text-slate-400">
                     No snippets have been trashed.
                   </span>
                 }
@@ -434,8 +434,8 @@ function NoteHeader({
 
       setAllNotes((prevNotes) =>
         prevNotes.map((note) =>
-          note._id === id ? { ...note, isFavorite: newFavorite } : note
-        )
+          note._id === id ? { ...note, isFavorite: newFavorite } : note,
+        ),
       );
 
       setSearchQuery("");
@@ -445,10 +445,10 @@ function NoteHeader({
   }
 
   return (
-    <div className="flex  justify-between   items-center     mx-4 ">
+    <div className="mx-4 flex items-center justify-between">
       <span
         onClick={() => clickedNoteTitle()}
-        className={`font-bold text-lg  w-[90%]     cursor-pointer hover:text-rose-600 `}
+        className={`w-[90%] cursor-pointer text-lg font-bold hover:text-rose-600`}
       >
         {truncateString(title, 60)}
       </span>
@@ -456,10 +456,10 @@ function NoteHeader({
       {!isTrashed && (
         <Checkbox
           icon={
-            <FavoriteBorderOutlinedIcon className="text-slate-400 cursor-pointer" />
+            <FavoriteBorderOutlinedIcon className="cursor-pointer text-slate-400" />
           }
           checkedIcon={
-            <FavoriteIcon className="text-rose-600 cursor-pointer" />
+            <FavoriteIcon className="cursor-pointer text-rose-600" />
           }
           checked={isFavorite}
           onClick={handleClickedCheckbox}
@@ -471,11 +471,11 @@ function NoteHeader({
 
 function NoteTags({ tags }: { tags: SingleTagType[] }) {
   return (
-    <div className="text-slate-500 text-[11px] mx-4 flex-wrap flex    gap-1 mt-4 ">
+    <div className="mx-4 mt-4 flex flex-wrap gap-1 text-[11px] text-slate-500">
       {tags.map((tag, index) => (
         <span
           key={index}
-          className="bg-rose-100 text-rose-600 p-1 rounded-md px-2"
+          className="rounded-md bg-rose-100 p-1 px-2 text-rose-600"
         >
           {tag.name}
         </span>
@@ -486,7 +486,7 @@ function NoteTags({ tags }: { tags: SingleTagType[] }) {
 
 function NoteDate({ creationDate }: { creationDate: string }) {
   return (
-    <div className="text-slate-500 text-[11px] flex gap-1 font-light mx-4 mt-1">
+    <div className="mx-4 mt-1 flex gap-1 text-[11px] font-light text-slate-500">
       <span className="">{getDateOnly(creationDate)}</span>
     </div>
   );
@@ -504,7 +504,7 @@ function NoteDescription({ description }: { description: string }) {
 
   return (
     <div
-      className={`${darkMode[1].isSelected ? "text-white" : ""} text-slate-600 text-[13px] mt-4 mx-4`}
+      className={`${darkMode[1].isSelected ? "text-white" : ""} mx-4 mt-4 text-[13px] text-slate-600`}
     >
       <span className="pre-wrap">{truncateString(description, 200)}</span>
     </div>
@@ -522,7 +522,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code }) => {
   } = useGlobalContext();
 
   return (
-    <div className="rounded-md overflow-hidden text-sm ">
+    <div className="overflow-hidden rounded-md text-sm">
       <SyntaxHighlighter
         language={"javascript"}
         style={darkMode[1].isSelected ? oneDark : materialLight}
@@ -573,16 +573,18 @@ function NoteFooter({
       await response.json();
 
       setAllNotes((prevNotes) =>
-        prevNotes.map((n) => (n._id === note._id ? { ...n, isTrash: true } : n))
+        prevNotes.map((n) =>
+          n._id === note._id ? { ...n, isTrash: true } : n,
+        ),
       );
 
       setShowPlaceHolder(true);
 
       toast((t) => (
-        <div className={`flex gap-2 items-center`}>
+        <div className={`flex items-center gap-2`}>
           <span className="text-sm">Note has been moved to trash</span>
           <button
-            className="bg-rose-600 p-[4px] px-3 text-sm text-white rounded-md flex gap-1 items-center"
+            className="flex items-center gap-1 rounded-md bg-rose-600 p-[4px] px-3 text-sm text-white"
             onClick={() => {
               toast.dismiss(t.id);
               resetNoteFunction(note._id);
@@ -615,7 +617,7 @@ function NoteFooter({
       await response.json();
 
       setAllNotes((prevNotes) =>
-        prevNotes.map((n) => (n._id === noteId ? { ...n, isTrash: false } : n))
+        prevNotes.map((n) => (n._id === noteId ? { ...n, isTrash: false } : n)),
       );
 
       setShowPlaceHolder(false);
@@ -627,12 +629,12 @@ function NoteFooter({
   }
 
   return (
-    <div className=" flex justify-between   text-[13px] text-slate-400 mx-4 mt-3">
-      <div className="flex gap-1 items-center">
+    <div className="mx-4 mt-3 flex justify-between text-[13px] text-slate-400">
+      <div className="flex items-center gap-1">
         {getLanguageIcon(language)}
         <span>{language}</span>
       </div>
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         {note.isTrash && (
           <RestoreFromTrashOutlinedIcon
             onClick={() => resetNoteFunction(note._id)}

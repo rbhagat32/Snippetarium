@@ -45,7 +45,7 @@ export default function SwiperSelection() {
           }
           return acc;
         },
-        [...prevTagsClicked]
+        [...prevTagsClicked],
       );
 
       return newTagsClicked;
@@ -96,14 +96,14 @@ export default function SwiperSelection() {
 
   return (
     <div
-      className={`${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"}  p-3 rounded-lg flex gap-5 `}
+      className={`${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} flex gap-5 rounded-lg p-3`}
     >
-      <div className="overflow-x-auto w-[100%]    ">
+      <div className="w-[100%] overflow-x-auto">
         {isLoading ? (
-          <div className="flex  gap-3 items-center mt-[2px]   ">
-            <div className="w-[80px] h-[30px] bg-slate-100 rounded-md"></div>
-            <div className="w-[80px] h-[30px] bg-slate-100 rounded-md"></div>
-            <div className="w-[80px] h-[30px] bg-slate-100 rounded-md"></div>
+          <div className="mt-[2px] flex items-center gap-3">
+            <div className="h-[30px] w-[80px] rounded-md bg-slate-100"></div>
+            <div className="h-[30px] w-[80px] rounded-md bg-slate-100"></div>
+            <div className="h-[30px] w-[80px] rounded-md bg-slate-100"></div>
           </div>
         ) : (
           <Swiper
@@ -116,7 +116,7 @@ export default function SwiperSelection() {
             {allTags.map((tag, index) => (
               <SwiperSlide
                 key={index}
-                className={`${tagsSelected[index] ? "bg-rose-600 text-white" : `${darkMode[1].isSelected ? "bg-slate-800" : "bg-white"} hover:text-rose-600   text-gray-400`}   p-1 rounded-md  `}
+                className={`${tagsSelected[index] ? "bg-rose-600 text-white" : `${darkMode[1].isSelected ? "bg-slate-800" : "bg-white"} text-gray-400 hover:text-rose-600`} rounded-md p-1`}
                 onClick={() => handleTagClick(index)}
               >
                 {tag.name}
@@ -127,7 +127,7 @@ export default function SwiperSelection() {
       </div>
       <button
         onClick={() => setOpenNewTagsWindow(true)}
-        className="bg-rose-600 p-1 rounded-md px-3 flex gap-1 items-center text-white text-sm"
+        className="flex items-center gap-1 rounded-md bg-rose-600 p-1 px-3 text-sm text-white"
       >
         <AddOutlinedIcon sx={{ fontSize: 18 }} />
         <span>Tag</span>

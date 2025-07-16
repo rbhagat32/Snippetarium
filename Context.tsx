@@ -407,7 +407,7 @@ export default function GlobalContextProvider({
     if (openContentNote && selectedNote) {
       // Find the index of the selected note
       const selectedIndex = allNotes.findIndex(
-        (note) => note._id === selectedNote._id
+        (note) => note._id === selectedNote._id,
       );
 
       if (selectedIndex > 0) {
@@ -449,7 +449,7 @@ export default function GlobalContextProvider({
     });
 
     const convertedLanguageCounts: CodeLanguageCounterType[] = Object.entries(
-      languageCounts
+      languageCounts,
     )
       .map(([language, count]) => ({
         language,
@@ -510,7 +510,7 @@ export const useGlobalContext = () => {
   const context = useContext(ContextProvider);
   if (!context) {
     throw new Error(
-      "useGlobalContext must be used within a GlobalContextProvider"
+      "useGlobalContext must be used within a GlobalContextProvider",
     );
   }
   return context;

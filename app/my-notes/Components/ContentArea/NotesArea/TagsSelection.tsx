@@ -2,19 +2,19 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 function TagsSelection() {
   return (
-    <div className="bg-white p-3 text-sm flex justify-between items-center rounded-lg">
+    <div className="flex items-center justify-between rounded-lg bg-white p-3 text-sm">
       <div className="flex gap-2">
-        <div className="bg-rose-500 text-white p-1 px-4 rounded-md cursor-pointer select-none ">
+        <div className="cursor-pointer select-none rounded-md bg-rose-500 p-1 px-4 text-white">
           All
         </div>
-        <div className=" text-slate-400 p-1 px-4 rounded-md cursor-pointer select-none">
+        <div className="cursor-pointer select-none rounded-md p-1 px-4 text-slate-400">
           functions
         </div>
-        <div className=" text-slate-400 p-1 px-4 rounded-md cursor-pointer select-none">
+        <div className="cursor-pointer select-none rounded-md p-1 px-4 text-slate-400">
           exercises
         </div>
       </div>
-      <div className="bg-rose-600 p-1 rounded-md px-3 flex gap-1 items-center text-white">
+      <div className="flex items-center gap-1 rounded-md bg-rose-600 p-1 px-3 text-white">
         <AddOutlinedIcon sx={{ fontSize: 18 }} />
         <span>Tag</span>
       </div>

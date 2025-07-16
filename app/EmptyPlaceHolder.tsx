@@ -19,7 +19,7 @@ function EmptyPlaceHolder({
     sharedUserIdObject: { sharedUserId },
   } = useGlobalContext();
   return (
-    <div className="  w-full h-[510px] pt-20 flex gap-3 flex-col items-center  ">
+    <div className="flex h-[510px] w-full flex-col items-center gap-3 pt-20">
       {muiIcon}
       {text}
       {isNew && (
@@ -29,10 +29,10 @@ function EmptyPlaceHolder({
               setIsNewNote,
               setSelectedNote,
               setOpenContentNote,
-              sharedUserId
+              sharedUserId,
             )
           }
-          className="bg-rose-600 p-[8px] pr-2  text-sm text-white rounded-md mt-2 justify-center items-center"
+          className="mt-2 items-center justify-center rounded-md bg-rose-600 p-[8px] pr-2 text-sm text-white"
         >
           <AddOutlinedIcon sx={{ fontSize: 17, color: "white" }} />
           <span className="ml-1 mr-2">Add a new snippet</span>
@@ -48,7 +48,7 @@ export function OpenTheContentNote(
   setIsNewNote: React.Dispatch<React.SetStateAction<boolean>>,
   setSelectedNote: React.Dispatch<React.SetStateAction<SingleNoteType | null>>,
   setOpenContentNote: React.Dispatch<React.SetStateAction<boolean>>,
-  sharedUserId: string
+  sharedUserId: string,
 ) {
   function formatDate(date: Date) {
     const options: Intl.DateTimeFormatOptions = {

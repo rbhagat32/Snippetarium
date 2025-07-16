@@ -19,15 +19,15 @@ export default function Page() {
   return (
     <div className="flex">
       {openConfirmationWindow && (
-        <div className="fixed w-full h-full bg-black z-50 opacity-20"></div>
+        <div className="fixed z-50 h-full w-full bg-black opacity-20"></div>
       )}
 
       {openNewTagsWindow && (
-        <div className="fixed w-full h-full bg-black z-50 opacity-20"></div>
+        <div className="fixed z-50 h-full w-full bg-black opacity-20"></div>
       )}
 
       {openTagsWindow && (
-        <div className="fixed w-full h-full bg-black z-20 opacity-20"></div>
+        <div className="fixed z-20 h-full w-full bg-black opacity-20"></div>
       )}
 
       <AddTagWindow />

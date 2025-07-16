@@ -67,7 +67,7 @@ function AddTagWindow() {
         marginRight: "auto",
         top: "100px",
       }}
-      className={`${openNewTagsWindow ? "fixed" : "hidden"} max-sm:w-[350px] w-[500px] shadow-md ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white border"}     z-50 p-6 rounded-lg`}
+      className={`${openNewTagsWindow ? "fixed" : "hidden"} w-[500px] shadow-md max-sm:w-[350px] ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "border bg-white"} z-50 rounded-lg p-6`}
     >
       <Header />
       <AddTagInput
@@ -90,18 +90,18 @@ function Header() {
   } = useGlobalContext();
 
   return (
-    <div className="flex justify-between items-center rounded-lg ">
+    <div className="flex items-center justify-between rounded-lg">
       <div className="flex items-center gap-2">
-        <span className="text-[18px] text-slate-600 font-bold">
+        <span className="text-[18px] font-bold text-slate-600">
           {selectedTagToEdit ? "Edit Tag" : "Add New Tag"}
         </span>
       </div>
       <div>
         <CloseIcon
           sx={{ fontSize: 15 }}
-          className="text-slate-400 cursor-pointer"
+          className="cursor-pointer text-slate-400"
           onClick={() => {
-            setOpenNewTagsWindow(false), setSelectedTagToEdit(null);
+            (setOpenNewTagsWindow(false), setSelectedTagToEdit(null));
           }}
         />
       </div>
@@ -140,18 +140,18 @@ function AddTagInput({
 
   return (
     <div className="mt-6">
-      <span className="text-slate-400 text-sm font-semibold">Tag Name</span>
+      <span className="text-sm font-semibold text-slate-400">Tag Name</span>
       <input
         ref={inputRef}
         value={tagName}
         onChange={(e) => onInputChange(e)}
         placeholder={placeholder}
-        className={`${darkMode[1].isSelected ? "bg-slate-700" : "bg-white border"} w-full  rounded-md p-2 mt-1 text-[12px] outline-none text-slate-600`}
+        className={`${darkMode[1].isSelected ? "bg-slate-700" : "border bg-white"} mt-1 w-full rounded-md p-2 text-[12px] text-slate-600 outline-none`}
       />
       {errorMessage.length > 0 && (
-        <div className="text-red-500 flex mt-2 gap-1 items-center ">
+        <div className="mt-2 flex items-center gap-1 text-red-500">
           <ErrorOutlineOutlinedIcon fontSize="small" className=" " />
-          <span className="text-red-500 text-[11px]">{errorMessage}</span>
+          <span className="text-[11px] text-red-500">{errorMessage}</span>
         </div>
       )}
     </div>
@@ -187,7 +187,7 @@ function ButtonGroup({
           setAllTags,
           setOpenNewTagsWindow,
           tagName,
-          sharedUserId
+          sharedUserId,
         );
       } else {
         handleEditTag(
@@ -198,7 +198,7 @@ function ButtonGroup({
           setSelectedTagToEdit,
           tagName,
           allNotes,
-          setAllNotes
+          setAllNotes,
         );
       }
 
@@ -211,19 +211,19 @@ function ButtonGroup({
   }
 
   return (
-    <div className="flex justify-end mt-6 gap-2 text-[12px]">
+    <div className="mt-6 flex justify-end gap-2 text-[12px]">
       <button
         onClick={() => {
           setOpenNewTagsWindow(false);
           setSelectedTagToEdit(null);
         }}
-        className="px-4 py-2  text-slate-600 border rounded-md hover:bg-slate-100"
+        className="rounded-md border px-4 py-2 text-slate-600 hover:bg-slate-100"
       >
         Cancel
       </button>
       <button
         onClick={handleClickedTag}
-        className="px-4 py-2   text-white bg-rose-600 rounded-md hover:bg-rose-700"
+        className="rounded-md bg-rose-600 px-4 py-2 text-white hover:bg-rose-700"
       >
         {selectedTagToEdit ? "Edit Tag" : "Add Tag"}
       </button>
@@ -235,7 +235,7 @@ async function addNewTagFunction(
   setAllTags: (value: React.SetStateAction<SingleTagType[]>) => void,
   setOpenNewTagsWindow: (value: React.SetStateAction<boolean>) => void,
   tagName: string,
-  sharedUserId: string
+  sharedUserId: string,
 ) {
   const newTag = {
     name: tagName,
@@ -279,12 +279,12 @@ async function addNewTagFunction(
 async function updateNote(
   note: SingleNoteType,
   oldTagName: string,
-  newTagName: string
+  newTagName: string,
 ) {
   const updatedTags = note.tags.map((tag) =>
     tag.name.toLowerCase() === oldTagName.toLowerCase()
       ? { ...tag, name: newTagName }
-      : tag
+      : tag,
   );
   const updateNoteResponse = await fetch(
     `/api/snippets?snippetId=${note._id}`,
@@ -297,7 +297,7 @@ async function updateNote(
         ...note,
         tags: updatedTags,
       }),
-    }
+    },
   );
 
   if (!updateNoteResponse.ok) {
@@ -314,11 +314,11 @@ async function handleEditTag(
   setOpenNewTagsWindow: (value: React.SetStateAction<boolean>) => void,
   selectedTagToEdit: SingleTagType,
   setSelectedTagToEdit: (
-    value: React.SetStateAction<SingleTagType | null>
+    value: React.SetStateAction<SingleTagType | null>,
   ) => void,
   newTagName: string,
   allNotes: SingleNoteType[],
-  setAllNotes: (value: React.SetStateAction<SingleNoteType[]>) => void
+  setAllNotes: (value: React.SetStateAction<SingleNoteType[]>) => void,
 ) {
   try {
     const updateTagResponse = await fetch(
@@ -329,7 +329,7 @@ async function handleEditTag(
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ name: newTagName }),
-      }
+      },
     );
 
     if (!updateTagResponse.ok) {
@@ -339,18 +339,18 @@ async function handleEditTag(
 
     const notesToUpdate = allNotes.filter((note) =>
       note.tags.some(
-        (t) => t.name.toLowerCase() === selectedTagToEdit.name.toLowerCase()
-      )
+        (t) => t.name.toLowerCase() === selectedTagToEdit.name.toLowerCase(),
+      ),
     );
 
     const updatePromises = notesToUpdate.map((note) =>
-      updateNote(note, selectedTagToEdit.name, newTagName)
+      updateNote(note, selectedTagToEdit.name, newTagName),
     );
 
     const updatedNotes = await Promise.all(updatePromises);
 
     const updatedAllTags = allTags.map((tag) =>
-      tag._id === selectedTagToEdit._id ? { ...tag, name: newTagName } : tag
+      tag._id === selectedTagToEdit._id ? { ...tag, name: newTagName } : tag,
     );
 
     const updatedAllNotes = allNotes.map((note) => {
@@ -363,7 +363,7 @@ async function handleEditTag(
         tags: note.tags.map((tag) =>
           tag.name.toLowerCase() === selectedTagToEdit.name.toLowerCase()
             ? { ...tag, name: newTagName }
-            : tag
+            : tag,
         ),
       };
     });
@@ -379,7 +379,7 @@ async function handleEditTag(
     toast.error(
       error instanceof Error
         ? error.message
-        : "Failed to update tag or related notes"
+        : "Failed to update tag or related notes",
     );
   }
 }

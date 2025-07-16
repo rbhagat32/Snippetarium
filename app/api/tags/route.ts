@@ -41,7 +41,7 @@ export async function PUT(request: any) {
     if (!tagId) {
       return NextResponse.json(
         { message: "tag ID is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -55,7 +55,7 @@ export async function PUT(request: any) {
           clerkUserId,
         },
       },
-      { returnDocument: "after" }
+      { returnDocument: "after" },
     );
 
     return NextResponse.json({
@@ -75,7 +75,7 @@ export async function DELETE(request: Request) {
     if (!tagId) {
       return NextResponse.json(
         { message: "tagId is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -90,7 +90,7 @@ export async function DELETE(request: Request) {
     console.error("Error deleting tag:", error);
     return NextResponse.json(
       { message: "Failed to delete tag" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

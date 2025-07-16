@@ -15,7 +15,7 @@ function ContentArea() {
   } = useGlobalContext();
   return (
     <div
-      className={`w-full ${darkMode[1].isSelected ? "bg-slate-700" : "bg-slate-100"} p-5 `}
+      className={`w-full ${darkMode[1].isSelected ? "bg-slate-700" : "bg-slate-100"} p-5`}
     >
       <TopBar />
       <NotesArea />
@@ -32,11 +32,11 @@ function TopBar() {
   } = useGlobalContext();
   return (
     <div
-      className={`${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} rounded-lg flex justify-between items-center  p-3`}
+      className={`${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} flex items-center justify-between rounded-lg p-3`}
     >
       <ProfileUser />
       <SearchBar />
-      <div className="flex gap-4 items-center">
+      <div className="flex items-center gap-4">
         <DarkMode />
         {isMobile && <SideBarMenuIcon />}
       </div>
@@ -50,7 +50,7 @@ function NotesArea() {
     isMobileObject: { isMobile },
   } = useGlobalContext();
   return (
-    <div className="flex gap-2 mt-5">
+    <div className="mt-5 flex gap-2">
       <div
         className={`${openContentNote ? `${isMobile ? "w-full" : "w-[50%]"}` : "w-full"}`}
       >

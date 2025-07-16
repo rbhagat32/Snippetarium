@@ -7,35 +7,35 @@ function ProfileUser() {
   const imageUrl = user?.imageUrl;
 
   const loadingImage = (
-    <div className="w-9 h-9 rounded-full mb-[5px] bg-slate-200 "></div>
+    <div className="mb-[5px] h-9 w-9 rounded-full bg-slate-200"></div>
   );
 
   const loadingUserName = (
-    <span className="font-semibold bg-slate-100 h-4 w-[100px]"></span>
+    <span className="h-4 w-[100px] bg-slate-100 font-semibold"></span>
   );
   const loadingUserEmail = (
-    <span className="text-slate-500 text-[11px] bg-slate-100 h-2 w-[130px]"></span>
+    <span className="h-2 w-[130px] bg-slate-100 text-[11px] text-slate-500"></span>
   );
 
   return (
-    <div className="flex gap-3 items-center  ">
+    <div className="flex items-center gap-3">
       {!user ? (
         loadingImage
       ) : (
         <img
           src={imageUrl}
           alt={`${user?.firstName} ${user?.lastName}`}
-          className="w-9 h-9 rounded-full mb-[5px] "
+          className="mb-[5px] h-9 w-9 rounded-full"
         />
       )}
 
       <div
-        className={`max-md:hidden  flex flex-col text-sm ${!user ? "gap-1" : ""}`}
+        className={`flex flex-col text-sm max-md:hidden ${!user ? "gap-1" : ""}`}
       >
         {!user ? (
           loadingUserName
         ) : (
-          <span className="font-semibold  ">
+          <span className="font-semibold">
             {user?.firstName} {user?.lastName}
           </span>
         )}
@@ -43,7 +43,7 @@ function ProfileUser() {
         {!user ? (
           loadingUserEmail
         ) : (
-          <span className="text-slate-500 text-[11px]  ">
+          <span className="text-[11px] text-slate-500">
             {user?.emailAddresses[0].emailAddress}
           </span>
         )}
