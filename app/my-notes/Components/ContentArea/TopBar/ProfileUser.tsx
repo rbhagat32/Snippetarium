@@ -6,13 +6,9 @@ function ProfileUser() {
   const { user } = useUser();
   const imageUrl = user?.imageUrl;
 
-  const loadingImage = (
-    <div className="mb-[5px] h-9 w-9 rounded-full bg-slate-200"></div>
-  );
+  const loadingImage = <div className="mb-[5px] h-9 w-9 rounded-full bg-slate-200"></div>;
 
-  const loadingUserName = (
-    <span className="h-4 w-[100px] bg-slate-100 font-semibold"></span>
-  );
+  const loadingUserName = <span className="h-4 w-[100px] bg-slate-100 font-semibold"></span>;
   const loadingUserEmail = (
     <span className="h-2 w-[130px] bg-slate-100 text-[11px] text-slate-500"></span>
   );
@@ -29,9 +25,7 @@ function ProfileUser() {
         />
       )}
 
-      <div
-        className={`flex flex-col text-sm max-md:hidden ${!user ? "gap-1" : ""}`}
-      >
+      <div className={`flex flex-col text-sm max-md:hidden ${!user ? "gap-1" : ""}`}>
         {!user ? (
           loadingUserName
         ) : (
@@ -43,9 +37,7 @@ function ProfileUser() {
         {!user ? (
           loadingUserEmail
         ) : (
-          <span className="text-[11px] text-slate-500">
-            {user?.emailAddresses[0].emailAddress}
-          </span>
+          <span className="text-[11px] text-slate-500">{user?.emailAddresses[0].emailAddress}</span>
         )}
       </div>
     </div>

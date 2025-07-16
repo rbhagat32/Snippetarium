@@ -45,7 +45,7 @@ export default function SwiperSelection() {
           }
           return acc;
         },
-        [...prevTagsClicked],
+        [...prevTagsClicked]
       );
 
       return newTagsClicked;

@@ -11,7 +11,7 @@ const SingleTagSchema = new Schema(
       required: true,
     },
   },
-  { _id: false },
+  { _id: false }
 );
 
 const SingleSnippetSchema = new mongoose.Schema({
@@ -62,7 +62,6 @@ const SingleSnippetSchema = new mongoose.Schema({
   },
 });
 
-const Snippet =
-  mongoose.models.Snippet || mongoose.model("Snippet", SingleSnippetSchema);
+const Snippet = mongoose.models.Snippet || mongoose.model("Snippet", SingleSnippetSchema);
 
 export default Snippet;

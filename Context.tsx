@@ -45,9 +45,7 @@ interface GlobalContextType {
 
   selectedNoteObject: {
     selectedNote: SingleNoteType | null;
-    setSelectedNote: React.Dispatch<
-      React.SetStateAction<SingleNoteType | null>
-    >;
+    setSelectedNote: React.Dispatch<React.SetStateAction<SingleNoteType | null>>;
   };
 
   isNewNoteObject: {
@@ -65,9 +63,7 @@ interface GlobalContextType {
   };
   selectedLanguageObject: {
     selectedLanguage: SingleCodeLanguageType | null;
-    setSelectedLanguage: React.Dispatch<
-      React.SetStateAction<SingleCodeLanguageType | null>
-    >;
+    setSelectedLanguage: React.Dispatch<React.SetStateAction<SingleCodeLanguageType | null>>;
   };
 
   openConfirmationWindowObject: {
@@ -77,9 +73,7 @@ interface GlobalContextType {
 
   codeLanguageCounterObject: {
     codeLanguagesCounter: CodeLanguageCounterType[];
-    setCodeLanguagesCounter: React.Dispatch<
-      React.SetStateAction<CodeLanguageCounterType[]>
-    >;
+    setCodeLanguagesCounter: React.Dispatch<React.SetStateAction<CodeLanguageCounterType[]>>;
   };
 
   openTagsWindowObject: {
@@ -98,9 +92,7 @@ interface GlobalContextType {
 
   selectedTagToEditObject: {
     selectedTagToEdit: SingleTagType | null;
-    setSelectedTagToEdit: React.Dispatch<
-      React.SetStateAction<SingleTagType | null>
-    >;
+    setSelectedTagToEdit: React.Dispatch<React.SetStateAction<SingleTagType | null>>;
   };
 
   tagsClickedObject: {
@@ -223,11 +215,7 @@ const ContextProvider = createContext<GlobalContextType>({
   },
 });
 
-export default function GlobalContextProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function GlobalContextProvider({ children }: { children: React.ReactNode }) {
   const [sideBarMenu, setSideBarMenu] = useState<SideBarMenu[]>([
     {
       id: 1,
@@ -271,12 +259,9 @@ export default function GlobalContextProvider({
   const [selectedNote, setSelectedNote] = useState<SingleNoteType | null>(null);
   const [isNewNote, setIsNewNote] = useState(false);
   const [selectedTags, setSelectedTags] = useState<SingleTagType[]>([]);
-  const [selectedLanguage, setSelectedLanguage] =
-    useState<SingleCodeLanguageType | null>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState<SingleCodeLanguageType | null>(null);
   const [openConfirmationWindow, setOpenConfirmationWindow] = useState(false);
-  const [codeLanguagesCounter, setCodeLanguagesCounter] = useState<
-    CodeLanguageCounterType[]
-  >([]);
+  const [codeLanguagesCounter, setCodeLanguagesCounter] = useState<CodeLanguageCounterType[]>([]);
   const [openTagsWindow, setOpenTagsWindow] = useState(false);
   const [openNewTagsWindow, setOpenNewTagsWindow] = useState(false);
   const [tagsAndLogoutMenu, setTagsAndLogoutMenu] = useState<SideBarMenu[]>([
@@ -293,8 +278,7 @@ export default function GlobalContextProvider({
       icons: <LogoutIcon sx={{ fontSize: 18 }} />,
     },
   ]);
-  const [selectedTagToEdit, setSelectedTagToEdit] =
-    useState<SingleTagType | null>(null);
+  const [selectedTagToEdit, setSelectedTagToEdit] = useState<SingleTagType | null>(null);
   const [tagsClicked, setTagsClicked] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
@@ -336,10 +320,7 @@ export default function GlobalContextProvider({
         if (data.notes) {
           //Sort the notes by date
           const sortedAllNotes: SingleNoteType[] = data.notes.sort((a, b) => {
-            return (
-              new Date(b.creationDate).getTime() -
-              new Date(a.creationDate).getTime()
-            );
+            return new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime();
           });
 
           setAllNotes(sortedAllNotes);
@@ -392,11 +373,7 @@ export default function GlobalContextProvider({
     if (openContentNote === false) {
     }
     const filteredNotes = allNotes.filter((note) => {
-      return (
-        note.title.trim() !== "" ||
-        note.description.trim() !== "" ||
-        note.code.trim() !== ""
-      );
+      return note.title.trim() !== "" || note.description.trim() !== "" || note.code.trim() !== "";
     });
     setAllNotes(filteredNotes);
   }, [openContentNote]);
@@ -406,9 +383,7 @@ export default function GlobalContextProvider({
   useEffect(() => {
     if (openContentNote && selectedNote) {
       // Find the index of the selected note
-      const selectedIndex = allNotes.findIndex(
-        (note) => note._id === selectedNote._id,
-      );
+      const selectedIndex = allNotes.findIndex((note) => note._id === selectedNote._id);
 
       if (selectedIndex > 0) {
         // Swap the selected note with the top note
@@ -425,10 +400,7 @@ export default function GlobalContextProvider({
     } else if (!openContentNote && swappedIndex !== null) {
       // Swap back when closing
       const updatedNotes = [...allNotes];
-      [updatedNotes[0], updatedNotes[swappedIndex]] = [
-        updatedNotes[swappedIndex],
-        updatedNotes[0],
-      ];
+      [updatedNotes[0], updatedNotes[swappedIndex]] = [updatedNotes[swappedIndex], updatedNotes[0]];
       setAllNotes(updatedNotes);
 
       // Reset the swapped index
@@ -448,9 +420,7 @@ export default function GlobalContextProvider({
       }
     });
 
-    const convertedLanguageCounts: CodeLanguageCounterType[] = Object.entries(
-      languageCounts,
-    )
+    const convertedLanguageCounts: CodeLanguageCounterType[] = Object.entries(languageCounts)
       .map(([language, count]) => ({
         language,
         count,
@@ -509,9 +479,7 @@ export default function GlobalContextProvider({
 export const useGlobalContext = () => {
   const context = useContext(ContextProvider);
   if (!context) {
-    throw new Error(
-      "useGlobalContext must be used within a GlobalContextProvider",
-    );
+    throw new Error("useGlobalContext must be used within a GlobalContextProvider");
   }
   return context;
 };

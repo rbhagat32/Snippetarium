@@ -39,10 +39,7 @@ export async function PUT(request: any) {
     const { name, clerkUserId } = await request.json();
 
     if (!tagId) {
-      return NextResponse.json(
-        { message: "tag ID is required" },
-        { status: 400 },
-      );
+      return NextResponse.json({ message: "tag ID is required" }, { status: 400 });
     }
 
     await connect();
@@ -55,7 +52,7 @@ export async function PUT(request: any) {
           clerkUserId,
         },
       },
-      { returnDocument: "after" },
+      { returnDocument: "after" }
     );
 
     return NextResponse.json({
@@ -73,10 +70,7 @@ export async function DELETE(request: Request) {
     const tagId = url.searchParams.get("tagId");
 
     if (!tagId) {
-      return NextResponse.json(
-        { message: "tagId is required" },
-        { status: 400 },
-      );
+      return NextResponse.json({ message: "tagId is required" }, { status: 400 });
     }
 
     const tagToDelete = await Tag.findOneAndDelete({ _id: tagId });
@@ -88,9 +82,6 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ message: "tag deleted successfully" });
   } catch (error) {
     console.error("Error deleting tag:", error);
-    return NextResponse.json(
-      { message: "Failed to delete tag" },
-      { status: 500 },
-    );
+    return NextResponse.json({ message: "Failed to delete tag" }, { status: 500 });
   }
 }

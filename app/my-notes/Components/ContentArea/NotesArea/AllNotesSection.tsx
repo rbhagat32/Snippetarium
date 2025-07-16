@@ -14,10 +14,7 @@ import { Checkbox } from "@mui/material";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import {
-  materialLight,
-  oneDark,
-} from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { materialLight, oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 function AllNotesSection() {
   const {
@@ -32,12 +29,10 @@ function AllNotesSection() {
     selectedNoteObject: {},
   } = useGlobalContext();
 
-  const filterIsTrashedNotes = allNotes.filter(
-    (note) => note.isTrash === false,
-  );
+  const filterIsTrashedNotes = allNotes.filter((note) => note.isTrash === false);
 
   const [filteredNotes, setFilteredNotes] = useState(
-    allNotes.filter((note) => note.isTrash === false),
+    allNotes.filter((note) => note.isTrash === false)
   );
 
   const [isSearching, setIsSearching] = useState(false);
@@ -75,9 +70,7 @@ function AllNotesSection() {
       }
 
       if (sideBarMenu[1].isSelected) {
-        setFilteredNotes(
-          allNotes.filter((note) => !note.isTrash && note.isFavorite),
-        );
+        setFilteredNotes(allNotes.filter((note) => !note.isTrash && note.isFavorite));
       }
     }
   }, [isSearching]);
@@ -93,7 +86,7 @@ function AllNotesSection() {
         const updateNotes = allNotes
           .filter((note) => {
             return tagsClicked.every((selectedTag) =>
-              note.tags.some((noteTag) => noteTag.name === selectedTag),
+              note.tags.some((noteTag) => noteTag.name === selectedTag)
             );
           })
           .filter((note) => !note.isTrash);
@@ -104,9 +97,7 @@ function AllNotesSection() {
 
     if (sideBarMenu[1].isSelected) {
       if (tagsClicked.length === 1 && tagsClicked[0] === "All") {
-        const updatesNotes = allNotes.filter(
-          (note) => !note.isTrash && note.isFavorite,
-        );
+        const updatesNotes = allNotes.filter((note) => !note.isTrash && note.isFavorite);
         setFilteredNotes(updatesNotes);
         return;
       }
@@ -114,7 +105,7 @@ function AllNotesSection() {
       const updateNotes = allNotes
         .filter((note) => {
           return tagsClicked.every((selectedTag) =>
-            note.tags.some((noteTag) => noteTag.name === selectedTag),
+            note.tags.some((noteTag) => noteTag.name === selectedTag)
           );
         })
         .filter((note) => !note.isTrash && note.isFavorite);
@@ -132,7 +123,7 @@ function AllNotesSection() {
       const updateNotes = allNotes
         .filter((note) => {
           return tagsClicked.every((selectedTag) =>
-            note.tags.some((noteTag) => noteTag.name === selectedTag),
+            note.tags.some((noteTag) => noteTag.name === selectedTag)
           );
         })
         .filter((note) => note.isTrash);
@@ -151,9 +142,7 @@ function AllNotesSection() {
     }
 
     if (sideBarMenu[1].isSelected) {
-      const filteredFavoriteNotes = allNotes.filter(
-        (note) => !note.isTrash && note.isFavorite,
-      );
+      const filteredFavoriteNotes = allNotes.filter((note) => !note.isTrash && note.isFavorite);
       setFilteredNotes(filteredFavoriteNotes);
     }
 
@@ -199,34 +188,24 @@ function AllNotesSection() {
             </div>
           ) : (
             <>
-              {filteredNotes.filter((note) => !note.isTrash).length === 0 &&
-              !isLoading ? (
+              {filteredNotes.filter((note) => !note.isTrash).length === 0 && !isLoading ? (
                 isSearching ? (
                   <EmptyPlaceHolder
                     muiIcon={
-                      <SearchOutlinedIcon
-                        className="text-slate-400"
-                        sx={{ fontSize: 110 }}
-                      />
+                      <SearchOutlinedIcon className="text-slate-400" sx={{ fontSize: 110 }} />
                     }
                     text={
-                      <span className="text-md text-center text-slate-400">
-                        No snippets found.
-                      </span>
+                      <span className="text-md text-center text-slate-400">No snippets found.</span>
                     }
                   />
                 ) : tagsClicked.filter((tag) => tag !== "All").length > 0 ? (
                   <EmptyPlaceHolder
                     muiIcon={
-                      <StyleOutlinedIcon
-                        className="text-slate-400"
-                        sx={{ fontSize: 110 }}
-                      />
+                      <StyleOutlinedIcon className="text-slate-400" sx={{ fontSize: 110 }} />
                     }
                     text={
                       <span className="text-md text-center text-slate-400">
-                        It looks like there are no <br /> snippets with this
-                        tag.
+                        It looks like there are no <br /> snippets with this tag.
                       </span>
                     }
                   />
@@ -273,17 +252,8 @@ function AllNotesSection() {
             </>
           ) : isSearching ? (
             <EmptyPlaceHolder
-              muiIcon={
-                <SearchOutlinedIcon
-                  className="text-slate-400"
-                  sx={{ fontSize: 110 }}
-                />
-              }
-              text={
-                <span className="text-md text-center text-slate-400">
-                  No snippets found.
-                </span>
-              }
+              muiIcon={<SearchOutlinedIcon className="text-slate-400" sx={{ fontSize: 110 }} />}
+              text={<span className="text-md text-center text-slate-400">No snippets found.</span>}
             />
           ) : (
             <EmptyPlaceHolder
@@ -317,10 +287,7 @@ function AllNotesSection() {
             <>
               <EmptyPlaceHolder
                 muiIcon={
-                  <DeleteOutlineOutlined
-                    className="text-slate-400"
-                    sx={{ fontSize: 110 }}
-                  />
+                  <DeleteOutlineOutlined className="text-slate-400" sx={{ fontSize: 110 }} />
                 }
                 text={
                   <span className="text-md text-center text-slate-400">
@@ -346,28 +313,13 @@ function SingleNote({ note }: { note: SingleNoteType }) {
     allNotesObject: {},
   } = useGlobalContext();
 
-  const {
-    _id,
-    title,
-    creationDate,
-    tags,
-    description,
-    code,
-    isFavorite,
-    isTrash,
-    language,
-  } = note;
+  const { _id, title, creationDate, tags, description, code, isFavorite, isTrash, language } = note;
 
   return (
     <div
       className={`${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} rounded-md py-4 hover:translate-y-[-1px] ${selectedNote?._id === _id && !selectedNote.isTrash ? "border border-rose-600" : ""} `}
     >
-      <NoteHeader
-        id={_id}
-        title={title}
-        isFavorite={isFavorite}
-        isTrashed={isTrash}
-      />
+      <NoteHeader id={_id} title={title} isFavorite={isFavorite} isTrashed={isTrash} />
       <NoteDate creationDate={creationDate} />
       <NoteTags tags={tags} />
       <NoteDescription description={description} />
@@ -433,9 +385,7 @@ function NoteHeader({
       await response.json();
 
       setAllNotes((prevNotes) =>
-        prevNotes.map((note) =>
-          note._id === id ? { ...note, isFavorite: newFavorite } : note,
-        ),
+        prevNotes.map((note) => (note._id === id ? { ...note, isFavorite: newFavorite } : note))
       );
 
       setSearchQuery("");
@@ -455,12 +405,8 @@ function NoteHeader({
 
       {!isTrashed && (
         <Checkbox
-          icon={
-            <FavoriteBorderOutlinedIcon className="cursor-pointer text-slate-400" />
-          }
-          checkedIcon={
-            <FavoriteIcon className="cursor-pointer text-rose-600" />
-          }
+          icon={<FavoriteBorderOutlinedIcon className="cursor-pointer text-slate-400" />}
+          checkedIcon={<FavoriteIcon className="cursor-pointer text-rose-600" />}
           checked={isFavorite}
           onClick={handleClickedCheckbox}
         />
@@ -473,10 +419,7 @@ function NoteTags({ tags }: { tags: SingleTagType[] }) {
   return (
     <div className="mx-4 mt-4 flex flex-wrap gap-1 text-[11px] text-slate-500">
       {tags.map((tag, index) => (
-        <span
-          key={index}
-          className="rounded-md bg-rose-100 p-1 px-2 text-rose-600"
-        >
+        <span key={index} className="rounded-md bg-rose-100 p-1 px-2 text-rose-600">
           {tag.name}
         </span>
       ))}
@@ -533,13 +476,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code }) => {
   );
 };
 
-function NoteFooter({
-  language,
-  note,
-}: {
-  language: string;
-  note: SingleNoteType;
-}) {
+function NoteFooter({ language, note }: { language: string; note: SingleNoteType }) {
   const {
     allNotesObject: { setAllNotes },
     darkModeObject: {},
@@ -573,9 +510,7 @@ function NoteFooter({
       await response.json();
 
       setAllNotes((prevNotes) =>
-        prevNotes.map((n) =>
-          n._id === note._id ? { ...n, isTrash: true } : n,
-        ),
+        prevNotes.map((n) => (n._id === note._id ? { ...n, isTrash: true } : n))
       );
 
       setShowPlaceHolder(true);
@@ -617,7 +552,7 @@ function NoteFooter({
       await response.json();
 
       setAllNotes((prevNotes) =>
-        prevNotes.map((n) => (n._id === noteId ? { ...n, isTrash: false } : n)),
+        prevNotes.map((n) => (n._id === noteId ? { ...n, isTrash: false } : n))
       );
 
       setShowPlaceHolder(false);

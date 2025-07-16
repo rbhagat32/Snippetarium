@@ -92,9 +92,8 @@ function CTASection() {
         <span className={`text-rose-600`}> Efficiently!</span>
       </h2>
       <p className="w-[450px] text-center text-sm text-slate-500 max-sm:w-full">
-        With our advanced tagging and search features, you can quickly find the
-        snippet you need, right when you need it. Spend less time searching for
-        code and more time writing it.
+        With our advanced tagging and search features, you can quickly find the snippet you need,
+        right when you need it. Spend less time searching for code and more time writing it.
       </p>
     </div>
   );

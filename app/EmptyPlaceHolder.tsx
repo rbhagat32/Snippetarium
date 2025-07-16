@@ -25,12 +25,7 @@ function EmptyPlaceHolder({
       {isNew && (
         <button
           onClick={() =>
-            OpenTheContentNote(
-              setIsNewNote,
-              setSelectedNote,
-              setOpenContentNote,
-              sharedUserId,
-            )
+            OpenTheContentNote(setIsNewNote, setSelectedNote, setOpenContentNote, sharedUserId)
           }
           className="mt-2 items-center justify-center rounded-md bg-rose-600 p-[8px] pr-2 text-sm text-white"
         >
@@ -48,7 +43,7 @@ export function OpenTheContentNote(
   setIsNewNote: React.Dispatch<React.SetStateAction<boolean>>,
   setSelectedNote: React.Dispatch<React.SetStateAction<SingleNoteType | null>>,
   setOpenContentNote: React.Dispatch<React.SetStateAction<boolean>>,
-  sharedUserId: string,
+  sharedUserId: string
 ) {
   function formatDate(date: Date) {
     const options: Intl.DateTimeFormatOptions = {

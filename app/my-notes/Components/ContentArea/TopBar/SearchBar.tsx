@@ -39,12 +39,7 @@ function SearchBar() {
       <button
         disabled={openContentNote}
         onClick={() =>
-          OpenTheContentNote(
-            setIsNewNote,
-            setSelectedNote,
-            setOpenContentNote,
-            sharedUserId,
-          )
+          OpenTheContentNote(setIsNewNote, setSelectedNote, setOpenContentNote, sharedUserId)
         }
         className={`absolute right-[6px] top-[6px] flex cursor-pointer select-none items-center gap-1 rounded-3xl p-1 px-2 text-[13px] text-white max-md:px-1 ${openContentNote ? "bg-rose-300" : "bg-rose-600"}`}
       >

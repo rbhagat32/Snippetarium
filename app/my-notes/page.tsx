@@ -22,13 +22,9 @@ export default function Page() {
         <div className="fixed z-50 h-full w-full bg-black opacity-20"></div>
       )}
 
-      {openNewTagsWindow && (
-        <div className="fixed z-50 h-full w-full bg-black opacity-20"></div>
-      )}
+      {openNewTagsWindow && <div className="fixed z-50 h-full w-full bg-black opacity-20"></div>}
 
-      {openTagsWindow && (
-        <div className="fixed z-20 h-full w-full bg-black opacity-20"></div>
-      )}
+      {openTagsWindow && <div className="fixed z-20 h-full w-full bg-black opacity-20"></div>}
 
       <AddTagWindow />
       <TagsWindow />

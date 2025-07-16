@@ -28,10 +28,7 @@ function TagsWindow() {
     [key: string]: number;
   }
 
-  const countTags = (
-    notes: any[],
-    allTags: Tag[],
-  ): { name: string; count: number }[] => {
+  const countTags = (notes: any[], allTags: Tag[]): { name: string; count: number }[] => {
     const tagCount: TagCount = allTags.reduce((acc: TagCount, tag) => {
       acc[tag.name] = 0;
       return acc;
@@ -53,10 +50,7 @@ function TagsWindow() {
       .sort((a, b) => b.count - a.count);
   };
 
-  const sortAllTags = (
-    notes: SingleNoteType[],
-    allTags: SingleTagType[],
-  ): SingleTagType[] => {
+  const sortAllTags = (notes: SingleNoteType[], allTags: SingleTagType[]): SingleTagType[] => {
     const tagCounts = countTags(notes, allTags);
 
     const countMap = new Map(tagCounts.map((item) => [item.name, item.count]));
@@ -65,8 +59,7 @@ function TagsWindow() {
       if (a.name === "All") return -1;
       if (b.name === "All") return 1;
 
-      const countDiff =
-        (countMap.get(b.name) || 0) - (countMap.get(a.name) || 0);
+      const countDiff = (countMap.get(b.name) || 0) - (countMap.get(a.name) || 0);
       return countDiff !== 0 ? countDiff : a.name.localeCompare(b.name);
     });
   };
@@ -112,10 +105,7 @@ function Header() {
         <span className="text-lg font-bold">Tags</span>
       </div>
       <div onClick={() => setOpenTagsWindow(false)}>
-        <CloseIcon
-          sx={{ fontSize: 16 }}
-          className="cursor-pointer text-slate-400"
-        />
+        <CloseIcon sx={{ fontSize: 16 }} className="cursor-pointer text-slate-400" />
       </div>
     </div>
   );
@@ -172,8 +162,8 @@ function TagsList({ searchQuery }: { searchQuery: string }) {
   } = useGlobalContext();
 
   const filterAllItemFromAllTags = allTags.filter((tag) => tag.name !== "All");
-  const filterAllTagsBasedOnSearchQuery = filterAllItemFromAllTags.filter(
-    (tag) => tag.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  const filterAllTagsBasedOnSearchQuery = filterAllItemFromAllTags.filter((tag) =>
+    tag.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -182,32 +172,17 @@ function TagsList({ searchQuery }: { searchQuery: string }) {
     >
       {filterAllItemFromAllTags.length === 0 && (
         <EmptyPlaceHolder
-          muiIcon={
-            <StyleOutlinedIcon
-              sx={{ fontSize: 66 }}
-              className="text-slate-400"
-            />
-          }
-          text={
-            <span className="font-light text-slate-400">
-              No tags has been created yet...
-            </span>
-          }
+          muiIcon={<StyleOutlinedIcon sx={{ fontSize: 66 }} className="text-slate-400" />}
+          text={<span className="font-light text-slate-400">No tags has been created yet...</span>}
         />
       )}
 
-      {filterAllTagsBasedOnSearchQuery.length === 0 &&
-        filterAllItemFromAllTags.length !== 0 && (
-          <EmptyPlaceHolder
-            muiIcon={
-              <SearchRoundedIcon
-                sx={{ fontSize: 66 }}
-                className="text-slate-400"
-              />
-            }
-            text={<span className="text-slate-400">No Tags Found</span>}
-          />
-        )}
+      {filterAllTagsBasedOnSearchQuery.length === 0 && filterAllItemFromAllTags.length !== 0 && (
+        <EmptyPlaceHolder
+          muiIcon={<SearchRoundedIcon sx={{ fontSize: 66 }} className="text-slate-400" />}
+          text={<span className="text-slate-400">No Tags Found</span>}
+        />
+      )}
 
       {filterAllTagsBasedOnSearchQuery.map((tag, index) => (
         <div key={index}>
@@ -251,9 +226,7 @@ function SingleTag({ tag }: { tag: SingleTagType }) {
         <div className="h-2 w-2 rounded-full bg-rose-600"></div>
         <div className="flex flex-col">
           <span className="font-bold">{tag.name}</span>
-          <span className="text-[12px] text-slate-400">
-            {countTagInAllNotes(tag)} Snippets
-          </span>
+          <span className="text-[12px] text-slate-400">{countTagInAllNotes(tag)} Snippets</span>
         </div>
       </div>
 
@@ -268,15 +241,7 @@ function SingleTag({ tag }: { tag: SingleTagType }) {
 
         <div
           onClick={() =>
-            deleteTag(
-              tag,
-              allTags,
-              setAllTags,
-              allNotes,
-              setAllNotes,
-              tagsClicked,
-              setTagsClicked,
-            )
+            deleteTag(tag, allTags, setAllTags, allNotes, setAllNotes, tagsClicked, setTagsClicked)
           }
           className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-slate-200 hover:bg-slate-300"
         >
@@ -288,22 +253,17 @@ function SingleTag({ tag }: { tag: SingleTagType }) {
 }
 
 async function updateNote(note: SingleNoteType, tagToRemove: string) {
-  const updatedTags = note.tags.filter(
-    (t) => t.name.toLowerCase() !== tagToRemove.toLowerCase(),
-  );
-  const updateNoteResponse = await fetch(
-    `/api/snippets?snippetId=${note._id}`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...note,
-        tags: updatedTags,
-      }),
+  const updatedTags = note.tags.filter((t) => t.name.toLowerCase() !== tagToRemove.toLowerCase());
+  const updateNoteResponse = await fetch(`/api/snippets?snippetId=${note._id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
+    body: JSON.stringify({
+      ...note,
+      tags: updatedTags,
+    }),
+  });
 
   if (!updateNoteResponse.ok) {
     throw new Error(`Failed to update note ${note._id}`);
@@ -320,7 +280,7 @@ async function deleteTag(
   allNotes: SingleNoteType[],
   setAllNotes: React.Dispatch<React.SetStateAction<SingleNoteType[]>>,
   tagsClicked: string[],
-  setTagsClicked: React.Dispatch<React.SetStateAction<string[]>>,
+  setTagsClicked: React.Dispatch<React.SetStateAction<string[]>>
 ) {
   try {
     const deleteTagResponse = await fetch(`/api/tags?tagId=${tag._id}`, {
@@ -333,18 +293,14 @@ async function deleteTag(
     }
 
     const notesToUpdate = allNotes.filter((note) =>
-      note.tags.some((t) => t.name.toLowerCase() === tag.name.toLowerCase()),
+      note.tags.some((t) => t.name.toLowerCase() === tag.name.toLowerCase())
     );
 
-    const updatePromises = notesToUpdate.map((note) =>
-      updateNote(note, tag.name),
-    );
+    const updatePromises = notesToUpdate.map((note) => updateNote(note, tag.name));
 
     const updatedNotes = await Promise.all(updatePromises);
 
-    const updatedAllTags = allTags.filter(
-      (t) => t.name.toLowerCase() !== tag.name.toLowerCase(),
-    );
+    const updatedAllTags = allTags.filter((t) => t.name.toLowerCase() !== tag.name.toLowerCase());
     const updatedAllNotes = allNotes.map((note) => {
       const updatedNote = updatedNotes.find((un) => un._id === note._id);
       if (updatedNote) {
@@ -352,25 +308,17 @@ async function deleteTag(
       }
       return {
         ...note,
-        tags: note.tags.filter(
-          (t) => t.name.toLowerCase() !== tag.name.toLowerCase(),
-        ),
+        tags: note.tags.filter((t) => t.name.toLowerCase() !== tag.name.toLowerCase()),
       };
     });
 
     setAllTags(updatedAllTags);
     setAllNotes(updatedAllNotes);
-    setTagsClicked(
-      tagsClicked.filter((t) => t.toLowerCase() !== tag.name.toLowerCase()),
-    );
+    setTagsClicked(tagsClicked.filter((t) => t.toLowerCase() !== tag.name.toLowerCase()));
 
     toast.success("Tag has been deleted successfully");
   } catch (error) {
     console.error("Error deleting tag:", error);
-    toast.error(
-      error instanceof Error
-        ? error.message
-        : "Failed to delete tag or update notes",
-    );
+    toast.error(error instanceof Error ? error.message : "Failed to delete tag or update notes");
   }
 }

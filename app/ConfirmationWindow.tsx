@@ -4,10 +4,7 @@ import toast from "react-hot-toast";
 
 function ConfirmationWindow() {
   const {
-    openConfirmationWindowObject: {
-      openConfirmationWindow,
-      setOpenConfirmationWindow,
-    },
+    openConfirmationWindowObject: { openConfirmationWindow, setOpenConfirmationWindow },
 
     allNotesObject: { allNotes, setAllNotes },
     selectedNoteObject: { selectedNote, setSelectedNote },
@@ -20,24 +17,19 @@ function ConfirmationWindow() {
     if (selectedNote) {
       setIsDeleting(true);
       try {
-        const response = await fetch(
-          `/api/snippets?snippetId=${selectedNote._id}`,
-          {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-            },
+        const response = await fetch(`/api/snippets?snippetId=${selectedNote._id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+        });
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const copyAllNotes = [...allNotes];
-        const updateAllNotes = copyAllNotes.filter(
-          (note) => note._id !== selectedNote._id,
-        );
+        const updateAllNotes = copyAllNotes.filter((note) => note._id !== selectedNote._id);
         setAllNotes(updateAllNotes);
         setOpenConfirmationWindow(false);
         setSelectedNote(null);
@@ -66,8 +58,7 @@ function ConfirmationWindow() {
     >
       <span className="text-xl font-bold"> {`Are you sure?`}</span>
       <span className="px-8 text-center text-[13px] opacity-75">
-        Are you sure you want to delete this snippet? This action cannot be
-        undone.
+        Are you sure you want to delete this snippet? This action cannot be undone.
       </span>
       <div className="mt-5 flex gap-2">
         <button

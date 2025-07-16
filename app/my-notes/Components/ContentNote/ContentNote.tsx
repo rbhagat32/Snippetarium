@@ -24,10 +24,8 @@ export async function saveNoteInDB(
   isNew: boolean,
 
   setAllNotes: React.Dispatch<React.SetStateAction<SingleNoteType[]>>,
-  setSingleNote: React.Dispatch<
-    React.SetStateAction<SingleNoteType | undefined>
-  >,
-  setIsNewNote: React.Dispatch<React.SetStateAction<boolean>>,
+  setSingleNote: React.Dispatch<React.SetStateAction<SingleNoteType | undefined>>,
+  setIsNewNote: React.Dispatch<React.SetStateAction<boolean>>
 ) {
   const url = isNew ? "/api/snippets" : `/api/snippets?snippetId=${note._id}`;
   const method = isNew ? "POST" : "PUT";
@@ -56,9 +54,7 @@ export async function saveNoteInDB(
         : prevNotes.map((n) => (n._id === savedNote._id ? savedNote : n));
 
       return updatedNotes.sort(
-        (a, b) =>
-          new Date(b.creationDate).getTime() -
-          new Date(a.creationDate).getTime(),
+        (a, b) => new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime()
       );
     });
 
@@ -82,9 +78,7 @@ function ContentNote() {
     selectedLanguageObject: { selectedLanguage },
   } = useGlobalContext();
 
-  const [singleNote, setSingleNote] = useState<SingleNoteType | undefined>(
-    undefined,
-  );
+  const [singleNote, setSingleNote] = useState<SingleNoteType | undefined>(undefined);
   useEffect(() => {
     if (openContentNote) {
       if (selectedNote) {
@@ -104,7 +98,7 @@ function ContentNote() {
       debounce((note: SingleNoteType, isNew: boolean) => {
         saveNoteInDB(note, isNew);
       }, 500),
-    [],
+    []
   );
 
   async function saveNoteInDB(note: SingleNoteType, isNew: boolean) {
@@ -136,9 +130,7 @@ function ContentNote() {
 
         if (isNew) {
           return updatedNotes.sort(
-            (a, b) =>
-              new Date(b.creationDate).getTime() -
-              new Date(a.creationDate).getTime(),
+            (a, b) => new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime()
           );
         }
         return updatedNotes;
@@ -179,10 +171,7 @@ function ContentNote() {
     >
       {singleNote && (
         <div>
-          <ContentNoteHeader
-            singleNote={singleNote}
-            setSingleNote={setSingleNote}
-          />
+          <ContentNoteHeader singleNote={singleNote} setSingleNote={setSingleNote} />
           <NoteTags singleNote={singleNote} setSingleNote={setSingleNote} />
           <Description singleNote={singleNote} setSingleNote={setSingleNote} />
           <CodeBlock singleNote={singleNote} setSingleNote={setSingleNote} />
@@ -199,9 +188,7 @@ function ContentNoteHeader({
   setSingleNote,
 }: {
   singleNote: SingleNoteType;
-  setSingleNote: React.Dispatch<
-    React.SetStateAction<SingleNoteType | undefined>
-  >;
+  setSingleNote: React.Dispatch<React.SetStateAction<SingleNoteType | undefined>>;
 }) {
   const {
     allNotesObject: {},
@@ -277,9 +264,7 @@ function NoteTags({
   setSingleNote,
 }: {
   singleNote: SingleNoteType;
-  setSingleNote: React.Dispatch<
-    React.SetStateAction<SingleNoteType | undefined>
-  >;
+  setSingleNote: React.Dispatch<React.SetStateAction<SingleNoteType | undefined>>;
 }) {
   const [hovered, setHovered] = useState(false);
   const [isOpened, setIsOpened] = useState<boolean>(false);
@@ -336,17 +321,12 @@ function NoteTags({
         <div className="flex select-none flex-wrap items-center gap-2">
           {singleNote.tags.length === 0 && (
             <div className="">
-              <span className="rounded-md bg-slate-100 p-1 px-2 text-slate-400">
-                No Tags
-              </span>
+              <span className="rounded-md bg-slate-100 p-1 px-2 text-slate-400">No Tags</span>
             </div>
           )}
 
           {singleNote.tags.map((tag, index) => (
-            <div
-              key={index}
-              className="rounded-md bg-slate-100 p-1 px-2 text-slate-400"
-            >
+            <div key={index} className="rounded-md bg-slate-100 p-1 px-2 text-slate-400">
               {tag.name}
             </div>
           ))}
@@ -361,10 +341,7 @@ function NoteTags({
           )}
         </div>
         {isOpened && filterAllFromAllTags.length > 0 && (
-          <TagsMenu
-            onClickedTag={(tag) => onClickedTag(tag)}
-            setIsOpened={setIsOpened}
-          />
+          <TagsMenu onClickedTag={(tag) => onClickedTag(tag)} setIsOpened={setIsOpened} />
         )}
       </div>
     </div>
@@ -388,9 +365,7 @@ function NoteTags({
     } = useGlobalContext();
     const tagsRef = useRef<HTMLDivElement>(null);
 
-    const filterAllItemsFromAllTags = allTags.filter(
-      (tag) => tag.name !== "All",
-    );
+    const filterAllItemsFromAllTags = allTags.filter((tag) => tag.name !== "All");
 
     const handleClickOutside = (event: MouseEvent) => {
       if (tagsRef.current && !tagsRef.current.contains(event.target as Node)) {
@@ -416,9 +391,7 @@ function NoteTags({
             key={tag._id}
             onClick={() => onClickedTag(tag)}
             className={` ${
-              selectedTags.some(
-                (t) => t.name.toLowerCase() === tag.name.toLocaleLowerCase(),
-              )
+              selectedTags.some((t) => t.name.toLowerCase() === tag.name.toLocaleLowerCase())
                 ? "bg-slate-300"
                 : ""
             } cursor-pointer select-none rounded-md p-1 px-2 text-slate-500 transition-all hover:bg-slate-300`}
@@ -507,8 +480,7 @@ function CodeBlock({
       }
       const findLanguage = allLanguages.find(
         (language) =>
-          language.name.toLocaleLowerCase() ===
-          selectedNote.language.toLocaleLowerCase(),
+          language.name.toLocaleLowerCase() === selectedNote.language.toLocaleLowerCase()
       );
 
       if (findLanguage) {
@@ -632,7 +604,7 @@ function CodeBlock({
 
     useEffect(() => {
       const filtered = allLanguages.filter((language) =>
-        language.name.toLowerCase().includes(searchQuery),
+        language.name.toLowerCase().includes(searchQuery)
       );
       setFilteredLanguages(filtered);
     }, [searchQuery]);

@@ -14,9 +14,7 @@ function ContentArea() {
     darkModeObject: { darkMode },
   } = useGlobalContext();
   return (
-    <div
-      className={`w-full ${darkMode[1].isSelected ? "bg-slate-700" : "bg-slate-100"} p-5`}
-    >
+    <div className={`w-full ${darkMode[1].isSelected ? "bg-slate-700" : "bg-slate-100"} p-5`}>
       <TopBar />
       <NotesArea />
     </div>
@@ -51,9 +49,7 @@ function NotesArea() {
   } = useGlobalContext();
   return (
     <div className="mt-5 flex gap-2">
-      <div
-        className={`${openContentNote ? `${isMobile ? "w-full" : "w-[50%]"}` : "w-full"}`}
-      >
+      <div className={`${openContentNote ? `${isMobile ? "w-full" : "w-[50%]"}` : "w-full"}`}>
         <SwiperSelection />
         <AllNotesSection />
       </div>

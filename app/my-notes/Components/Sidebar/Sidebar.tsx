@@ -115,9 +115,7 @@ function Languages() {
             {codeLanguagesCounter.map((language, index) => (
               <div key={index} className="flex justify-between">
                 <div className="flex items-center gap-2">
-                  {getLanguageIcon(
-                    capitalizeFirstOccurrence(language.language),
-                  )}
+                  {getLanguageIcon(capitalizeFirstOccurrence(language.language))}
                   <span> {capitalizeFirstOccurrence(language.language)}</span>
                 </div>
                 <span className="font-bold">{language.count}</span>

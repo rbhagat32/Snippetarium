@@ -66,10 +66,7 @@ export async function PUT(request: any) {
     } = await request.json();
 
     if (!snippetId) {
-      return NextResponse.json(
-        { message: "Snippet ID is required" },
-        { status: 400 },
-      );
+      return NextResponse.json({ message: "Snippet ID is required" }, { status: 400 });
     }
 
     await connect();
@@ -89,7 +86,7 @@ export async function PUT(request: any) {
           isTrash,
         },
       },
-      { returnDocument: "after" },
+      { returnDocument: "after" }
     );
 
     return NextResponse.json({
@@ -107,27 +104,18 @@ export async function DELETE(request: Request) {
     const snippetId = url.searchParams.get("snippetId");
 
     if (!snippetId) {
-      return NextResponse.json(
-        { message: "snippetId is required" },
-        { status: 400 },
-      );
+      return NextResponse.json({ message: "snippetId is required" }, { status: 400 });
     }
 
     const snippetToDelete = await Snippet.findOneAndDelete({ _id: snippetId });
 
     if (!snippetToDelete) {
-      return NextResponse.json(
-        { message: "Snippet not found" },
-        { status: 404 },
-      );
+      return NextResponse.json({ message: "Snippet not found" }, { status: 404 });
     }
 
     return NextResponse.json({ message: "Snippet deleted successfully" });
   } catch (error) {
     console.error("Error deleting snippet:", error);
-    return NextResponse.json(
-      { message: "Failed to delete snippet" },
-      { status: 500 },
-    );
+    return NextResponse.json({ message: "Failed to delete snippet" }, { status: 500 });
   }
 }

@@ -182,13 +182,7 @@ function ButtonGroup({
 
     if (!allTags.some((tag) => tag.name === tagName)) {
       if (!selectedTagToEdit) {
-        addNewTagFunction(
-          allTags,
-          setAllTags,
-          setOpenNewTagsWindow,
-          tagName,
-          sharedUserId,
-        );
+        addNewTagFunction(allTags, setAllTags, setOpenNewTagsWindow, tagName, sharedUserId);
       } else {
         handleEditTag(
           allTags,
@@ -198,7 +192,7 @@ function ButtonGroup({
           setSelectedTagToEdit,
           tagName,
           allNotes,
-          setAllNotes,
+          setAllNotes
         );
       }
 
@@ -235,7 +229,7 @@ async function addNewTagFunction(
   setAllTags: (value: React.SetStateAction<SingleTagType[]>) => void,
   setOpenNewTagsWindow: (value: React.SetStateAction<boolean>) => void,
   tagName: string,
-  sharedUserId: string,
+  sharedUserId: string
 ) {
   const newTag = {
     name: tagName,
@@ -276,29 +270,20 @@ async function addNewTagFunction(
   }
 }
 
-async function updateNote(
-  note: SingleNoteType,
-  oldTagName: string,
-  newTagName: string,
-) {
+async function updateNote(note: SingleNoteType, oldTagName: string, newTagName: string) {
   const updatedTags = note.tags.map((tag) =>
-    tag.name.toLowerCase() === oldTagName.toLowerCase()
-      ? { ...tag, name: newTagName }
-      : tag,
+    tag.name.toLowerCase() === oldTagName.toLowerCase() ? { ...tag, name: newTagName } : tag
   );
-  const updateNoteResponse = await fetch(
-    `/api/snippets?snippetId=${note._id}`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...note,
-        tags: updatedTags,
-      }),
+  const updateNoteResponse = await fetch(`/api/snippets?snippetId=${note._id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
+    body: JSON.stringify({
+      ...note,
+      tags: updatedTags,
+    }),
+  });
 
   if (!updateNoteResponse.ok) {
     throw new Error(`Failed to update note ${note._id}`);
@@ -313,24 +298,19 @@ async function handleEditTag(
   setAllTags: (value: React.SetStateAction<SingleTagType[]>) => void,
   setOpenNewTagsWindow: (value: React.SetStateAction<boolean>) => void,
   selectedTagToEdit: SingleTagType,
-  setSelectedTagToEdit: (
-    value: React.SetStateAction<SingleTagType | null>,
-  ) => void,
+  setSelectedTagToEdit: (value: React.SetStateAction<SingleTagType | null>) => void,
   newTagName: string,
   allNotes: SingleNoteType[],
-  setAllNotes: (value: React.SetStateAction<SingleNoteType[]>) => void,
+  setAllNotes: (value: React.SetStateAction<SingleNoteType[]>) => void
 ) {
   try {
-    const updateTagResponse = await fetch(
-      `/api/tags?tagId=${selectedTagToEdit._id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: newTagName }),
+    const updateTagResponse = await fetch(`/api/tags?tagId=${selectedTagToEdit._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({ name: newTagName }),
+    });
 
     if (!updateTagResponse.ok) {
       const errorData = await updateTagResponse.json();
@@ -338,19 +318,17 @@ async function handleEditTag(
     }
 
     const notesToUpdate = allNotes.filter((note) =>
-      note.tags.some(
-        (t) => t.name.toLowerCase() === selectedTagToEdit.name.toLowerCase(),
-      ),
+      note.tags.some((t) => t.name.toLowerCase() === selectedTagToEdit.name.toLowerCase())
     );
 
     const updatePromises = notesToUpdate.map((note) =>
-      updateNote(note, selectedTagToEdit.name, newTagName),
+      updateNote(note, selectedTagToEdit.name, newTagName)
     );
 
     const updatedNotes = await Promise.all(updatePromises);
 
     const updatedAllTags = allTags.map((tag) =>
-      tag._id === selectedTagToEdit._id ? { ...tag, name: newTagName } : tag,
+      tag._id === selectedTagToEdit._id ? { ...tag, name: newTagName } : tag
     );
 
     const updatedAllNotes = allNotes.map((note) => {
@@ -363,7 +341,7 @@ async function handleEditTag(
         tags: note.tags.map((tag) =>
           tag.name.toLowerCase() === selectedTagToEdit.name.toLowerCase()
             ? { ...tag, name: newTagName }
-            : tag,
+            : tag
         ),
       };
     });
@@ -376,10 +354,6 @@ async function handleEditTag(
     toast.success("Tag has been updated successfully");
   } catch (error) {
     console.error("Error updating tag:", error);
-    toast.error(
-      error instanceof Error
-        ? error.message
-        : "Failed to update tag or related notes",
-    );
+    toast.error(error instanceof Error ? error.message : "Failed to update tag or related notes");
   }
 }
