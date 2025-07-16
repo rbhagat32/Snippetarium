@@ -51,7 +51,6 @@ export function OpenTheContentNote(
   sharedUserId: string
 ) {
   function formatDate(date: Date) {
-    //format the date to dd month yyyy
     const options: Intl.DateTimeFormatOptions = {
       day: "numeric",
       month: "short",
@@ -61,10 +60,10 @@ export function OpenTheContentNote(
       second: "2-digit",
       hour12: false,
     };
+
     return new Intl.DateTimeFormat("en-US", options).format(date);
   }
 
-  // Creating an new note
   const newSingleNote: SingleNoteType = {
     _id: uuidv4(),
     clerkUserId: sharedUserId || "",

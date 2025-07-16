@@ -1,7 +1,7 @@
 "use client";
 
 import { useGlobalContext } from "@/ContextApi";
-import getLanguageIcon from "@/app/utils/languageTextToIcon";
+import getLanguageIcon from "@/app/utils/languageToIcon";
 import { useClerk } from "@clerk/nextjs";
 import DataObjectIcon from "@mui/icons-material/DataObject";
 
@@ -123,13 +123,6 @@ function Languages() {
                 <span className="font-bold">{language.count}</span>
               </div>
             ))}
-
-            {/* <div className="flex justify-between">
-          <div className="flex gap-1 items-center">
-            <SiCplusplus size={15} /> C++
-          </div>
-          <span className="font-bold">2</span>
-        </div> */}
           </div>
         </>
       )}
@@ -138,7 +131,7 @@ function Languages() {
 }
 
 function capitalizeFirstOccurrence(str: string) {
-  if (!str) return str; // If the string is empty, return it as is.
+  if (!str) return str;
 
   for (let i = 0; i < str.length; i++) {
     if (str[i] !== " ") {
@@ -146,5 +139,5 @@ function capitalizeFirstOccurrence(str: string) {
     }
   }
 
-  return str; // If no non-space characters are found, return the string as is.
+  return str;
 }

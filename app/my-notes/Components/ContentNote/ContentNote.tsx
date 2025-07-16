@@ -6,16 +6,13 @@ import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDown
 import StyleOutlinedIcon from "@mui/icons-material/StyleOutlined";
 import TitleOutlinedIcon from "@mui/icons-material/TitleOutlined";
 import React, { useEffect, useRef, useState } from "react";
-
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 import DoneAllOutlinedIcon from "@mui/icons-material/DoneAllOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@mui/material";
-
 import { allLanguages } from "@/app/data/Languages";
 import AceEditor from "react-ace";
-
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/theme-tomorrow";
@@ -89,7 +86,6 @@ function ContentNote() {
     undefined
   );
   useEffect(() => {
-    //If openContentNote is true
     if (openContentNote) {
       if (selectedNote) {
         setSingleNote(selectedNote);
@@ -229,7 +225,6 @@ function ContentNoteHeader({
     }
   }
 
-  //Set the focus to the text area
   useEffect(() => {
     if (openContentNote) {
       textRef.current?.focus();
@@ -238,7 +233,6 @@ function ContentNoteHeader({
     }
   }, [openContentNote]);
 
-  //When the focus is on the text area, set the focus to the title
   useEffect(() => {
     if (singleNote.title !== "") {
       setOnFocus(true);
@@ -327,8 +321,6 @@ function NoteTags({
     setSingleNote(newSingleNote);
   }, [selectedTags]);
 
-  //This function create an dynamic array to store the tags chosen by the user
-
   return (
     <div className="flex text-[13px] items-center gap-2">
       <StyleOutlinedIcon
@@ -397,7 +389,6 @@ function NoteTags({
     } = useGlobalContext();
     const tagsRef = useRef<HTMLDivElement>(null);
 
-    //Get rid from the All elements in the all Tags array
     const filterAllItemsFromAllTags = allTags.filter(
       (tag) => tag.name !== "All"
     );
@@ -459,7 +450,6 @@ function Description({
   const [isHovered, setIsHovered] = useState(false);
 
   function onUpdateDescription(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    //Create a new singleNote with the new title
     const newSingleNote = { ...singleNote, description: event.target.value };
     setSingleNote(newSingleNote);
   }
@@ -469,9 +459,7 @@ function Description({
   useEffect(() => {
     const textArea = textAreaRef.current;
     if (textArea) {
-      // Reset the height to recalculate scrollHeight
       textArea.style.height = "auto";
-      // Set the height to the scrollHeight plus some extra space (optional)
       textArea.style.height = `${textArea.scrollHeight + 20}px`;
     }
   }, [singleNote.description]);
@@ -517,8 +505,6 @@ function CodeBlock({
 
   useEffect(() => {
     if (selectedNote) {
-      //If selectedNote is not empty when we click on add a snippet
-      //set the selectedLanguage to the first language in the allLanguages array
       if (selectedNote.language === "") {
         setSelectedLanguage(allLanguages[0]);
         return;
@@ -585,14 +571,12 @@ function CodeBlock({
           </IconButton>
         </div>
 
-        {/* Language drop down */}
         <div
           onClick={() => setIsOpened(!isOpened)}
           className={`flex gap-2 justify-between   bg-slate-100 p-[6px] px-3 rounded-md items-center text-[12px]  mt-3 
             absolute top-1 left-3 ${darkMode[1].isSelected ? "bg-slate-600 text-white" : "bg-slate-100 text-slate-400"} cursor-pointer`}
         >
           <div className="flex gap-1 items-center">
-            {/* <SiJavascript size={15} className="text-slate-400  " /> */}
             {selectedLanguage?.icon}
             <span className="mt-[1px]">{selectedLanguage?.name}</span>
           </div>
@@ -608,7 +592,7 @@ function CodeBlock({
           placeholder="Your code..."
           mode="javascript"
           theme="tomorrow"
-          name="blah2"
+          name="code-editor"
           width="100%"
           height="500px"
           fontSize={14}
@@ -645,15 +629,13 @@ function CodeBlock({
       textRef.current?.focus();
     }, [isOpened]);
 
-    // Filtering logic
     const [filteredLanguages, setFilteredLanguages] = useState(allLanguages);
     const menuRef = useRef<HTMLDivElement>(null);
     const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchQuery(event.target.value.toLowerCase()); // Lowercase for case-insensitive search
+      setSearchQuery(event.target.value.toLowerCase());
     };
 
     useEffect(() => {
-      // Update filteredLanguages based on search query
       const filtered = allLanguages.filter((language) =>
         language.name.toLowerCase().includes(searchQuery)
       );
@@ -682,10 +664,10 @@ function CodeBlock({
     return (
       <div
         ref={menuRef}
-        className={`${darkMode[1].isSelected ? "bg-slate-600  " : " "}   h-[220px]  absolute flex-col gap-2 p-3 w-[250px]  rounded-md left-3 bg-slate-100 z-50 flex   text-slate-400`}
+        className={`${darkMode[1].isSelected ? "bg-slate-600" : " "}   h-[220px]  absolute flex-col gap-2 p-3 w-[250px]  rounded-md left-3 bg-slate-100 z-50 flex   text-slate-400`}
       >
         <div
-          className={`i${darkMode[1].isSelected ? "bg-slate-800 " : "bg-slate-200 "}p-1 rounded-md flex gap-1 mb-1`}
+          className={`i${darkMode[1].isSelected ? "bg-slate-800" : "bg-slate-200 "} p-1 rounded-md flex gap-1 mb-1`}
         >
           <SearchIcon />
           <input
@@ -697,12 +679,12 @@ function CodeBlock({
           />
         </div>
 
-        <div className=" h-40 bg-slate-100 overflow-x-auto  ">
+        <div className=" h-40 bg-slate-100 overflow-x-auto">
           {filteredLanguages.map((language) => (
             <div
               onClick={() => clickedLanguage(language)}
               key={language.id}
-              className={`flex mb-2 gap-2  hover:bg-slate-200     p-[6px] px-3 rounded-md items-center    
+              className={`flex mb-2 gap-2 hover:bg-slate-200 p-[6px] px-3 rounded-md items-center    
             cursor-pointer ${selectedLanguage?.name.toLocaleLowerCase() === language.name.toLocaleLowerCase() ? "bg-slate-200" : ""}`}
             >
               {language.icon}

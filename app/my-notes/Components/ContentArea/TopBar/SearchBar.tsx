@@ -2,6 +2,7 @@ import { OpenTheContentNote } from "@/app/EmptyPlaceHolder";
 import { useGlobalContext } from "@/ContextApi";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+
 function SearchBar() {
   const {
     darkModeObject: { darkMode },

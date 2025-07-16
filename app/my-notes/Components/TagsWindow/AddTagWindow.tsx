@@ -44,7 +44,6 @@ function AddTagWindow() {
     setTagName(newValue);
   }
 
-  // Reset the form when the openNewTagsWindow state changes
   useEffect(() => {
     if (openNewTagsWindow) {
       setTagName("");
@@ -93,7 +92,6 @@ function Header() {
   return (
     <div className="flex justify-between items-center rounded-lg ">
       <div className="flex items-center gap-2">
-        {/* <StyleOutlinedIcon className="text-slate-600" /> */}
         <span className="text-[18px] text-slate-600 font-bold">
           {selectedTagToEdit ? "Edit Tag" : "Add New Tag"}
         </span>
@@ -177,8 +175,6 @@ function ButtonGroup({
   } = useGlobalContext();
 
   function handleClickedTag() {
-    // Check if the tag already exists
-
     if (tagName.trim().length === 0) {
       setErrorMessage("Tag name is still empty!");
       return;
@@ -280,9 +276,6 @@ async function addNewTagFunction(
   }
 }
 
-//Edit The Tag in the database
-//---------------------------
-
 async function updateNote(
   note: SingleNoteType,
   oldTagName: string,
@@ -328,7 +321,6 @@ async function handleEditTag(
   setAllNotes: (value: React.SetStateAction<SingleNoteType[]>) => void
 ) {
   try {
-    // Step 1: Update tag in the database
     const updateTagResponse = await fetch(
       `/api/tags?tagId=${selectedTagToEdit._id}`,
       {
@@ -345,7 +337,6 @@ async function handleEditTag(
       throw new Error(errorData.message || "Failed to update tag");
     }
 
-    // Step 2: Update all notes that contain this tag
     const notesToUpdate = allNotes.filter((note) =>
       note.tags.some(
         (t) => t.name.toLowerCase() === selectedTagToEdit.name.toLowerCase()
@@ -358,7 +349,6 @@ async function handleEditTag(
 
     const updatedNotes = await Promise.all(updatePromises);
 
-    // Step 3: Update local state
     const updatedAllTags = allTags.map((tag) =>
       tag._id === selectedTagToEdit._id ? { ...tag, name: newTagName } : tag
     );

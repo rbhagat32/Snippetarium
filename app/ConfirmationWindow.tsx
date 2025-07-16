@@ -34,14 +34,13 @@ function ConfirmationWindow() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        // If the delete request was successful, update the local state
         const copyAllNotes = [...allNotes];
         const updateAllNotes = copyAllNotes.filter(
           (note) => note._id !== selectedNote._id
         );
         setAllNotes(updateAllNotes);
         setOpenConfirmationWindow(false);
-        setSelectedNote(null); // Use undefined for consistency
+        setSelectedNote(null);
 
         toast.success("Snippet has been deleted");
       } catch (error) {

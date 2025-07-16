@@ -4,12 +4,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import StyleOutlinedIcon from "@mui/icons-material/StyleOutlined";
 import React, { useEffect, useRef, useState } from "react";
-
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
-
 import EmptyPlaceHolder from "@/app/EmptyPlaceHolder";
 import { useGlobalContext } from "@/ContextApi";
 import toast from "react-hot-toast";
@@ -35,24 +32,21 @@ function TagsWindow() {
     notes: any[],
     allTags: Tag[]
   ): { name: string; count: number }[] => {
-    // Initialize tagCount with all tags set to 0
     const tagCount: TagCount = allTags.reduce((acc: TagCount, tag) => {
       acc[tag.name] = 0;
       return acc;
     }, {});
 
-    // Count occurrences of tags in notes
     notes.forEach((note) => {
       note.tags.forEach((tag: Tag) => {
         tagCount[tag.name]++;
       });
     });
 
-    // Convert to array of objects and update "All" count
     return allTags
       .map((tag) => {
         if (tag.name === "All") {
-          return { name: "All", count: allNotes.length }; // Set count to 7 for "All"
+          return { name: "All", count: allNotes.length };
         }
         return { name: tag.name, count: tagCount[tag.name] };
       })
@@ -63,29 +57,22 @@ function TagsWindow() {
     notes: SingleNoteType[],
     allTags: SingleTagType[]
   ): SingleTagType[] => {
-    // First, get the count of tags
     const tagCounts = countTags(notes, allTags);
 
-    // Create a map for quick lookup of counts
     const countMap = new Map(tagCounts.map((item) => [item.name, item.count]));
 
-    // Sort the allTags array
     return [...allTags].sort((a, b) => {
-      // Always keep "All" at the top
       if (a.name === "All") return -1;
       if (b.name === "All") return 1;
 
-      // Sort by count (descending), then alphabetically if counts are equal
       const countDiff =
         (countMap.get(b.name) || 0) - (countMap.get(a.name) || 0);
       return countDiff !== 0 ? countDiff : a.name.localeCompare(b.name);
     });
   };
 
-  // Usage
   const sortedTags: SingleTagType[] = sortAllTags(allNotes, allTags);
 
-  //This useEffect will clear the search query if something changes in the allTags Array
   useEffect(() => {
     setSearchQuery("");
   }, [allTags]);
@@ -208,7 +195,7 @@ function TagsList({ searchQuery }: { searchQuery: string }) {
           }
         />
       )}
-      {/*  */}
+
       {filterAllTagsBasedOnSearchQuery.length === 0 &&
         filterAllItemFromAllTags.length !== 0 && (
           <EmptyPlaceHolder
@@ -221,6 +208,7 @@ function TagsList({ searchQuery }: { searchQuery: string }) {
             text={<span className="text-slate-400">No Tags Found</span>}
           />
         )}
+
       {filterAllTagsBasedOnSearchQuery.map((tag, index) => (
         <div key={index}>
           <SingleTag tag={tag} />
@@ -245,7 +233,6 @@ function SingleTag({ tag }: { tag: SingleTagType }) {
     setSelectedTagToEdit(tag);
   }
 
-  //This function count how many this tag found in all notes
   function countTagInAllNotes(tag: SingleTagType) {
     let count = 0;
     allNotes.forEach((note) => {
@@ -339,7 +326,6 @@ async function deleteTag(
   setTagsClicked: React.Dispatch<React.SetStateAction<string[]>>
 ) {
   try {
-    // Step 1: Delete tag from database
     const deleteTagResponse = await fetch(`/api/tags?tagId=${tag._id}`, {
       method: "DELETE",
     });
@@ -349,7 +335,6 @@ async function deleteTag(
       throw new Error(errorData.message || "Failed to delete tag");
     }
 
-    // Step 2: Update all notes that contain this tag
     const notesToUpdate = allNotes.filter((note) =>
       note.tags.some((t) => t.name.toLowerCase() === tag.name.toLowerCase())
     );
@@ -360,7 +345,6 @@ async function deleteTag(
 
     const updatedNotes = await Promise.all(updatePromises);
 
-    // Step 3: Update local state
     const updatedAllTags = allTags.filter(
       (t) => t.name.toLowerCase() !== tag.name.toLowerCase()
     );
