@@ -82,7 +82,7 @@ function ConfirmationWindow() {
         <button
           onClick={deleteTheSnippet}
           disabled={isDeleting}
-          className={`  w-full px-10 text-[12px]    p-3 text-white rounded-md bg-purple-600`}
+          className={`  w-full px-10 text-[12px]    p-3 text-white rounded-md bg-rose-600`}
         >
           {isDeleting ? "Deleting..." : "Delete"}
         </button>

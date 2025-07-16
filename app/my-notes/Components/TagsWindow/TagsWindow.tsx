@@ -156,7 +156,7 @@ function SearchBar({
       </div>
       <button
         onClick={() => setOpenNewTagsWindow(true)}
-        className="bg-purple-600 ml-2 p-[10px] flex w-[15%] text-sm rounded-md text-white items-center justify-center max-lg:w-[25%]"
+        className="bg-rose-600 ml-2 p-[10px] flex w-[15%] text-sm rounded-md text-white items-center justify-center max-lg:w-[25%]"
       >
         <AddOutlinedIcon sx={{ fontSize: 17 }} />
         <span className="max-md:hidden">Add Tag</span>
@@ -248,7 +248,7 @@ function SingleTag({ tag }: { tag: SingleTagType }) {
       className={` ${darkMode[1].isSelected ? "bg-slate-800" : "bg-white"} p-2 rounded-lg flex gap-3 items-center justify-between px-4 `}
     >
       <div className="flex gap-3 items-center">
-        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
+        <div className="w-2 h-2 bg-rose-600 rounded-full"></div>
         <div className="flex flex-col">
           <span className="font-bold">{tag.name}</span>
           <span className="text-slate-400 text-[12px]">

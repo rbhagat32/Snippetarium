@@ -27,11 +27,11 @@ export default function Sidebar() {
   function Logo() {
     return (
       <div className="flex gap-2 items-center">
-        <div className={`bg-purple-600 p-[6px] rounded-md`}>
+        <div className={`bg-rose-600 p-[6px] rounded-md`}>
           <CodeIcon sx={{ fontSize: 27, color: "white" }} />
         </div>
         <div className="flex gap-0 text-[19px] ">
-          <span className={`font-bold text-purple-600`}>Snippet</span>
+          <span className={`font-bold text-rose-600`}>Snippet</span>
           <span className="text-slate-400">arium</span>
         </div>
       </div>
@@ -74,7 +74,7 @@ export default function Sidebar() {
             <li
               key={index}
               onClick={() => clickedMenu(index)}
-              className={`flex  cursor-pointer select-none gap-2 items-center ${menu.isSelected ? "bg-purple-600 text-white" : "text-slate-400 hover:text-purple-600"}  p-[7px] px-2 rounded-md w-[80%]`}
+              className={`flex  cursor-pointer select-none gap-2 items-center ${menu.isSelected ? "bg-rose-600 text-white" : "text-slate-400 hover:text-rose-600"}  p-[7px] px-2 rounded-md w-[80%]`}
             >
               {menu.icons}
               <span>{menu.name}</span>
@@ -89,7 +89,7 @@ export default function Sidebar() {
             <li
               key={index}
               onClick={() => clickedTagsAndLogOutMenu(index)}
-              className={`flex cursor-pointer select-none gap-2 items-center ${menu.isSelected ? "bg-purple-600 text-white " : "text-slate-400"}  p-[7px] px-2 rounded-md w-[80%] hover:text-purple-600`}
+              className={`flex cursor-pointer select-none gap-2 items-center ${menu.isSelected ? "bg-rose-600 text-white " : "text-slate-400"}  p-[7px] px-2 rounded-md w-[80%] hover:text-rose-600`}
             >
               {menu.icons}
               <span>{menu.name}</span>

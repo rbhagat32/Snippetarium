@@ -244,7 +244,7 @@ function ContentNoteHeader({
       <div className="flex   gap-2 w-full  ">
         <TitleOutlinedIcon
           sx={{ fontSize: 19 }}
-          className={`${onFocus ? "text-purple-600" : "text-slate-400"} mt-[4px]`}
+          className={`${onFocus ? "text-rose-600" : "text-slate-400"} mt-[4px]`}
         />
         <textarea
           ref={textRef}
@@ -325,7 +325,7 @@ function NoteTags({
     <div className="flex text-[13px] items-center gap-2">
       <StyleOutlinedIcon
         sx={{ fontSize: 19 }}
-        className={`${hovered ? "text-purple-600" : "text-slate-400"}`}
+        className={`${hovered ? "text-rose-600" : "text-slate-400"}`}
       />
       <div
         onMouseEnter={() => setHovered(true)}
@@ -468,7 +468,7 @@ function Description({
     <div className="flex gap-2  text-[12px]  mt-8">
       <DescriptionOutlinedIcon
         sx={{ fontSize: 18 }}
-        className={` mt-[9px] ${isHovered ? "text-purple-600" : "text-slate-400"}`}
+        className={` mt-[9px] ${isHovered ? "text-rose-600" : "text-slate-400"}`}
       />
 
       <textarea
@@ -480,7 +480,7 @@ function Description({
         onChange={onUpdateDescription}
         value={singleNote.description}
         placeholder="New Description..."
-        className={`text-sm outline-none  border ${isHovered ? "border-purple-600" : ""} rounded-lg p-2   w-full ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"}`}
+        className={`text-sm outline-none  border ${isHovered ? "border-rose-600" : ""} rounded-lg p-2   w-full ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"}`}
       />
     </div>
   );
@@ -546,13 +546,13 @@ function CodeBlock({
     <div className="flex gap-2  text-[12px] text-slate-400 mt-8 relative">
       <CodeOutlinedIcon
         sx={{ fontSize: 18 }}
-        className={` mt-[9px] ${isHovered ? "text-purple-600" : "text-slate-400"}`}
+        className={` mt-[9px] ${isHovered ? "text-rose-600" : "text-slate-400"}`}
       />
 
       <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`${isHovered ? "border-purple-600" : ""} border rounded-lg p-3 pt-16 w-full relative`}
+        className={`${isHovered ? "border-rose-600" : ""} border rounded-lg p-3 pt-16 w-full relative`}
       >
         <div className="absolute top-4 right-4 z-40">
           <IconButton disabled={isCopied}>

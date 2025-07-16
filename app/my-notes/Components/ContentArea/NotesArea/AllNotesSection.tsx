@@ -368,7 +368,7 @@ function SingleNote({ note }: { note: SingleNoteType }) {
   return (
     <div
       className={`${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} ${openContentNote ? "w-full" : "w-[390px]"} 
-      max-sm:w-full rounded-md py-4   hover:translate-y-[-1px] ${selectedNote?._id === _id && !selectedNote.isTrash ? "border border-purple-600" : ""} `}
+      max-sm:w-full rounded-md py-4   hover:translate-y-[-1px] ${selectedNote?._id === _id && !selectedNote.isTrash ? "border border-rose-600" : ""} `}
     >
       <NoteHeader
         id={_id}
@@ -456,7 +456,7 @@ function NoteHeader({
     <div className="flex  justify-between   items-center     mx-4 ">
       <span
         onClick={() => clickedNoteTitle()}
-        className={`font-bold text-lg  w-[90%]     cursor-pointer hover:text-purple-600 `}
+        className={`font-bold text-lg  w-[90%]     cursor-pointer hover:text-rose-600 `}
       >
         {truncateString(title, 60)}
       </span>
@@ -467,7 +467,7 @@ function NoteHeader({
             <FavoriteBorderOutlinedIcon className="text-slate-400 cursor-pointer" />
           }
           checkedIcon={
-            <FavoriteIcon className="text-purple-600 cursor-pointer" />
+            <FavoriteIcon className="text-rose-600 cursor-pointer" />
           }
           checked={isFavorite}
           onClick={handleClickedCheckbox}
@@ -483,7 +483,7 @@ function NoteTags({ tags }: { tags: SingleTagType[] }) {
       {tags.map((tag, index) => (
         <span
           key={index}
-          className="bg-purple-100 text-purple-600 p-1 rounded-md px-2"
+          className="bg-rose-100 text-rose-600 p-1 rounded-md px-2"
         >
           {tag.name}
         </span>
@@ -590,7 +590,7 @@ function NoteFooter({
         <div className={`flex gap-2 items-center`}>
           <span className="text-sm">Note has been moved to trash</span>
           <button
-            className="bg-purple-600 p-[4px] px-3 text-sm text-white rounded-md flex gap-1 items-center"
+            className="bg-rose-600 p-[4px] px-3 text-sm text-white rounded-md flex gap-1 items-center"
             onClick={() => {
               toast.dismiss(t.id);
               resetNoteFunction(note._id);
@@ -652,7 +652,7 @@ function NoteFooter({
         <DeleteRoundedIcon
           onClick={trashNoteFunction}
           sx={{ fontSize: 17 }}
-          className={`cursor-pointer ${note.isTrash && "text-purple-600"} ${openContentNote ? "hidden" : ""}`}
+          className={`cursor-pointer ${note.isTrash && "text-rose-600"} ${openContentNote ? "hidden" : ""}`}
         />
       </div>
     </div>

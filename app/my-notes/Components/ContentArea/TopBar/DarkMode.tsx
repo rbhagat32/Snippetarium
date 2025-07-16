@@ -23,7 +23,7 @@ function DarkMode() {
       {darkMode.map((item, index) => {
         return (
           <div
-            className={` ${item.isSelected ? "bg-purple-600 text-white" : "  text-purple-600"} 
+            className={` ${item.isSelected ? "bg-rose-600 text-white" : "  text-rose-600"} 
           
             w-7 h-7 flex items-center justify-center rounded-full top-[4px] p-1 left-1 cursor-pointer select-none`}
             key={index}

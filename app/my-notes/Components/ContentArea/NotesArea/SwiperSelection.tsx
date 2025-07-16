@@ -116,7 +116,7 @@ export default function SwiperSelection() {
             {allTags.map((tag, index) => (
               <SwiperSlide
                 key={index}
-                className={`${tagsSelected[index] ? "bg-purple-600 text-white" : `${darkMode[1].isSelected ? "bg-slate-800" : "bg-white"} hover:text-purple-600   text-gray-400`}   p-1 rounded-md  `}
+                className={`${tagsSelected[index] ? "bg-rose-600 text-white" : `${darkMode[1].isSelected ? "bg-slate-800" : "bg-white"} hover:text-rose-600   text-gray-400`}   p-1 rounded-md  `}
                 onClick={() => handleTagClick(index)}
               >
                 {tag.name}
@@ -127,7 +127,7 @@ export default function SwiperSelection() {
       </div>
       <button
         onClick={() => setOpenNewTagsWindow(true)}
-        className="bg-purple-600 p-1 rounded-md px-3 flex gap-1 items-center text-white text-sm"
+        className="bg-rose-600 p-1 rounded-md px-3 flex gap-1 items-center text-white text-sm"
       >
         <AddOutlinedIcon sx={{ fontSize: 18 }} />
         <span>Tag</span>
