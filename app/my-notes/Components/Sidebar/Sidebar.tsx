@@ -107,18 +107,18 @@ function Languages() {
   } = useGlobalContext();
 
   return (
-    <div className="mt-12 text-sm">
+    <div className="mt-12 pr-14 text-sm">
       {codeLanguagesCounter.length > 0 && (
         <>
           <div className="font-bold text-slate-400">Languages</div>
           <div className="ml-2 mt-5 flex flex-col gap-4 text-slate-400">
             {codeLanguagesCounter.map((language, index) => (
               <div key={index} className="flex justify-between">
-                <div className="flex items-center gap-2">
+                <div className="flex items-end gap-2">
                   {getLanguageIcon(capitalizeFirstOccurrence(language.language))}
                   <span> {capitalizeFirstOccurrence(language.language)}</span>
                 </div>
-                <span className="mr-14 font-bold">{language.count}</span>
+                <span className="font-bold">{language.count}</span>
               </div>
             ))}
           </div>
