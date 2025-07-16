@@ -63,7 +63,7 @@ function Buttons() {
         <div className="flex gap-2 max-sm:flex-col max-sm:w-full max-sm:mt-8">
           <Link href="/sign-in">
             <button
-              className={`max-sm:w-full  bg-rose-600 p-[8px] px-6 text-sm text-white rounded-md`}
+              className={`max-sm:w-full bg-rose-600 p-[8px] px-6 text-sm text-white rounded-md border border-transparent`}
             >
               Sign In
             </button>
@@ -71,8 +71,8 @@ function Buttons() {
 
           <Link href="/sign-up">
             <button
-              className={` max-sm:w-full text-sm border border-rose-600 text-rose-600 
-      hover:bg-rose-600 hover:text-white p-[8px] px-6 rounded-md`}
+              className={`max-sm:w-full text-sm border border-rose-600 text-rose-600 
+      hover:bg-rose-600 hover:text-white p-[8px] px-6 rounded-md duration-300`}
             >
               Sign Up
             </button>
