@@ -16,7 +16,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`${openSideBar ? "fixed z-50 shadow-lg" : "max-md:hidden"} min-h-screen flex-col gap-2 p-6 pr-10 pt-9 ${darkMode[1].isSelected ? "bg-slate-800" : "bg-white"} `}
+      className={`w-[20vw] ${openSideBar ? "fixed z-50 shadow-lg" : "max-md:hidden"} min-h-screen flex-col gap-2 p-6 pr-10 pt-9 ${darkMode[1].isSelected ? "bg-slate-800" : "bg-white"} `}
     >
       <Logo />
       <QuickLinks />
