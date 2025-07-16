@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalContext } from "@/ContextApi";
+import { useGlobalContext } from "@/Context";
 import { Toaster } from "react-hot-toast";
 import ConfirmationWindow from "../ConfirmationWindow";
 import ContentArea from "./Components/ContentArea/ContentArea";

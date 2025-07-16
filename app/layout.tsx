@@ -1,4 +1,4 @@
-import GlobalContextProvider from "@/ContextApi";
+import GlobalContextProvider from "@/Context";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";

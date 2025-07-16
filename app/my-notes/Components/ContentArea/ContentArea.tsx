@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalContext } from "@/ContextApi";
+import { useGlobalContext } from "@/Context";
 import ContentNote from "../ContentNote/ContentNote";
 import AllNotesSection from "./NotesArea/AllNotesSection";
 import SwiperSelection from "./NotesArea/SwiperSelection";

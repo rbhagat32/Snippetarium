@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { useGlobalContext } from "@/ContextApi";
+import { useGlobalContext } from "@/Context";
 import { FreeMode } from "swiper/modules";
 
 export default function SwiperSelection() {

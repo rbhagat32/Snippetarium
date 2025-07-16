@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalContext } from "@/ContextApi";
+import { useGlobalContext } from "@/Context";
 import getLanguageIcon from "@/app/utils/languageToIcon";
 import { useClerk } from "@clerk/nextjs";
 import DataObjectIcon from "@mui/icons-material/DataObject";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalContext } from "@/ContextApi";
+import { useGlobalContext } from "@/Context";
 import CloseIcon from "@mui/icons-material/Close";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import React, { useEffect, useRef, useState } from "react";

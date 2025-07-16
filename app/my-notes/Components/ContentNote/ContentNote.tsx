@@ -1,4 +1,4 @@
-import { useGlobalContext } from "@/ContextApi";
+import { useGlobalContext } from "@/Context";
 import CloseIcon from "@mui/icons-material/Close";
 import CodeOutlinedIcon from "@mui/icons-material/CodeOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";

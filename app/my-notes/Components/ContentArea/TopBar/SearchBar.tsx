@@ -1,5 +1,5 @@
 import { OpenTheContentNote } from "@/app/EmptyPlaceHolder";
-import { useGlobalContext } from "@/ContextApi";
+import { useGlobalContext } from "@/Context";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 

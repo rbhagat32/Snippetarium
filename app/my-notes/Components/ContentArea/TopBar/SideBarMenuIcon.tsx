@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalContext } from "@/ContextApi";
+import { useGlobalContext } from "@/Context";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 

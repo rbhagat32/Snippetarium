@@ -1,4 +1,4 @@
-import { useGlobalContext } from "@/ContextApi";
+import { useGlobalContext } from "@/Context";
 import React from "react";
 import toast from "react-hot-toast";
 

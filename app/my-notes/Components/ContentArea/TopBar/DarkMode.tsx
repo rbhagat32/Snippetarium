@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalContext } from "@/ContextApi";
+import { useGlobalContext } from "@/Context";
 function DarkMode() {
   const {
     darkModeObject: { darkMode, setDarkMode },
