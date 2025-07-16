@@ -1,6 +1,5 @@
 import mongoose, { Schema } from "mongoose";
 
-// Define the SingleTagType schema
 const SingleTagSchema = new Schema(
   {
     name: {

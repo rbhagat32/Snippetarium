@@ -1,5 +1,5 @@
 import connect from "@/app/lib/connect";
-import Snippet from "@/app/Models/SnippetSchema";
+import Snippet from "@/app/models/snippet";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {

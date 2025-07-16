@@ -1,5 +1,5 @@
 import connect from "@/app/lib/connect";
-import Tag from "@/app/Models/TagSchema";
+import Tag from "@/app/models/tag";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
