@@ -297,13 +297,10 @@ export default function GlobalContextProvider({ children }: { children: React.Re
   }, [isLoaded, user]);
 
   useEffect(() => {
-    // Check window size on initial render
     handleResize();
 
-    // Add event listener for window resize
     window.addEventListener("resize", handleResize);
 
-    // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -318,7 +315,6 @@ export default function GlobalContextProvider({ children }: { children: React.Re
         }
         const data: { notes: SingleNoteType[] } = await response.json();
         if (data.notes) {
-          //Sort the notes by date
           const sortedAllNotes: SingleNoteType[] = data.notes.sort((a, b) => {
             return new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime();
           });
@@ -367,8 +363,6 @@ export default function GlobalContextProvider({ children }: { children: React.Re
     setSelectedTags(selectedNote?.tags || []);
   }, [selectedNote]);
 
-  //This use Effect will check the title and the description and the code are empty. if yes it will be
-  //removed from the allNotes array to avoid having empty notes
   useEffect(() => {
     if (openContentNote === false) {
     }
@@ -382,11 +376,9 @@ export default function GlobalContextProvider({ children }: { children: React.Re
 
   useEffect(() => {
     if (openContentNote && selectedNote) {
-      // Find the index of the selected note
       const selectedIndex = allNotes.findIndex((note) => note._id === selectedNote._id);
 
       if (selectedIndex > 0) {
-        // Swap the selected note with the top note
         const updatedNotes = [...allNotes];
         [updatedNotes[0], updatedNotes[selectedIndex]] = [
           updatedNotes[selectedIndex],
@@ -394,16 +386,13 @@ export default function GlobalContextProvider({ children }: { children: React.Re
         ];
         setAllNotes(updatedNotes);
 
-        // Save the index where we swapped from
         setSwappedIndex(selectedIndex);
       }
     } else if (!openContentNote && swappedIndex !== null) {
-      // Swap back when closing
       const updatedNotes = [...allNotes];
       [updatedNotes[0], updatedNotes[swappedIndex]] = [updatedNotes[swappedIndex], updatedNotes[0]];
       setAllNotes(updatedNotes);
 
-      // Reset the swapped index
       setSwappedIndex(null);
     }
   }, [openContentNote, selectedNote, allNotes, swappedIndex]);
@@ -430,7 +419,6 @@ export default function GlobalContextProvider({ children }: { children: React.Re
     setCodeLanguagesCounter(convertedLanguageCounts);
   }, [allNotes]);
 
-  //If the tags window is open it will be closed when the user clicks outside of it
   useEffect(() => {
     if (openTagsWindow) {
       setOpenTagsWindow(false);
