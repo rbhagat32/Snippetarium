@@ -398,9 +398,9 @@ function NoteHeader({
     <div className="mx-4 flex items-center justify-between">
       <span
         onClick={() => clickedNoteTitle()}
-        className={`w-[90%] cursor-pointer text-lg font-bold hover:text-rose-600`}
+        className={`w-[90%] cursor-pointer overflow-hidden text-lg font-bold hover:text-rose-600`}
       >
-        {truncateString(title, 60)}
+        {truncateString(title, 40)}
       </span>
 
       {!isTrashed && (
@@ -418,11 +418,17 @@ function NoteHeader({
 function NoteTags({ tags }: { tags: SingleTagType[] }) {
   return (
     <div className="mx-4 mt-4 flex flex-wrap gap-1 text-[11px] text-slate-500">
-      {tags.map((tag, index) => (
-        <span key={index} className="rounded-md bg-rose-100 p-1 px-2 text-rose-600">
-          {tag.name}
-        </span>
-      ))}
+      {tags.length > 0 ? (
+        <>
+          {tags.map((tag, index) => (
+            <span key={index} className="rounded-md bg-rose-100 p-1 px-2 text-rose-600">
+              {tag.name}
+            </span>
+          ))}
+        </>
+      ) : (
+        <span className="rounded-md bg-transparent p-1 px-2 text-transparent">.</span>
+      )}
     </div>
   );
 }
