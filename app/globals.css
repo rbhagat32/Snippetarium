@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: (var(--foreground-rgb));
+}
+
+.poppins {
+  font-family: var(--font-poppins);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .grid-cols-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+}
+
+.mySwiper .swiper-slide {
+  width: auto !important; /* Make sure width is auto */
+  display: inline-block; /* Inline-block to fit content */
+  padding: 6px;
+  padding-left: 16px;
+  padding-right: 16px;
+  /* background-color: #6b21a8; Example background color */
+  user-select: none;
+  cursor: pointer;
+  border-radius: 8px; /* Example border radius */
+  margin-right: 30px;
+  font-size: 14px; /* Space between slides */
+}
+
+.my-masonry-grid {
+  display: flex;
+  margin-left: -16px; /* Adjust gutter size as needed */
+  width: auto;
+}
+
+.my-masonry-grid_column {
+  padding-left: 16px; /* Gutter size */
+  background-clip: padding-box;
+}
+
+.my-masonry-grid_column > div {
+  margin-bottom: 16px; /* Space between items */
+}
