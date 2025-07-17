@@ -6,7 +6,7 @@ import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ReplayIcon from "@mui/icons-material/Replay";
-import RestoreFromTrashOutlinedIcon from "@mui/icons-material/RestoreFromTrashOutlined";
+import RestoreIcon from "@mui/icons-material/Restore";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import StyleOutlinedIcon from "@mui/icons-material/StyleOutlined";
 import TextSnippetOutlinedIcon from "@mui/icons-material/TextSnippetOutlined";
@@ -317,7 +317,7 @@ function SingleNote({ note }: { note: SingleNoteType }) {
 
   return (
     <div
-      className={`${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} rounded-md py-4 hover:translate-y-[-1px] ${selectedNote?._id === _id && !selectedNote.isTrash ? "border border-rose-600" : ""} `}
+      className={`h-full ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} rounded-md py-4 hover:translate-y-[-1px] ${selectedNote?._id === _id && !selectedNote.isTrash ? "border border-rose-600" : ""} `}
     >
       <NoteHeader id={_id} title={title} isFavorite={isFavorite} isTrashed={isTrash} />
       <NoteDate creationDate={creationDate} />
@@ -577,17 +577,17 @@ function NoteFooter({ language, note }: { language: string; note: SingleNoteType
       </div>
       <div className="flex items-center gap-2">
         {note.isTrash && (
-          <RestoreFromTrashOutlinedIcon
+          <RestoreIcon
             onClick={() => resetNoteFunction(note._id)}
             sx={{ fontSize: 17 }}
-            className="cursor-pointer"
+            className="cursor-pointer hover:text-green-600"
           />
         )}
 
         <DeleteRoundedIcon
           onClick={trashNoteFunction}
           sx={{ fontSize: 17 }}
-          className={`cursor-pointer ${note.isTrash && "text-rose-600"} ${openContentNote ? "hidden" : ""}`}
+          className={`cursor-pointer hover:text-rose-600 ${note.isTrash && "text-rose-600"} ${openContentNote ? "hidden" : ""}`}
         />
       </div>
     </div>
